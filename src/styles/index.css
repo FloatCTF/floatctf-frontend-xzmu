@@ -1,0 +1,6 @@
+/* 样式入口：顺序敏感 —— 令牌 → 基础 → 布局 → 组件 → 领域 */
+@import "./tokens.css";
+@import "./base.css";
+@import "./layout.css";
+@import "./components.css";
+@import "./domain.css";

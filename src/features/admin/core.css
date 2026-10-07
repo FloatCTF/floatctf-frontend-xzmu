@@ -1,0 +1,280 @@
+/**
+ * 管理控制台 · 核心域样式（类名前缀 `.xz-adm-`）。
+ *
+ * 只补齐 `src/styles/*.css` 未覆盖的形态；配色一律走 CSS 变量
+ * （`--xz-crimson` / `--xz-gold` / `--xz-line` …），不写内联 hex。
+ */
+
+/* ── 工具条 ───────────────────────────────────────────────────────── */
+.xz-adm-toolbar {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: var(--xz-sp-3);
+	flex-wrap: wrap;
+	margin-bottom: var(--xz-sp-3);
+}
+
+.xz-adm-toolbar__main {
+	margin-bottom: 0;
+	flex: 1 1 320px;
+}
+
+.xz-adm-hint {
+	color: var(--xz-ink-3);
+	font-size: var(--xz-fs-xs);
+}
+
+.xz-adm-actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: var(--xz-sp-1);
+	flex-wrap: nowrap;
+	white-space: nowrap;
+}
+
+.xz-adm-id {
+	display: inline-flex;
+	align-items: center;
+	gap: 2px;
+}
+
+.xz-adm-clamp {
+	display: inline-block;
+	max-width: 340px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	vertical-align: bottom;
+}
+
+/* ── 版式 ─────────────────────────────────────────────────────────── */
+.xz-adm-section {
+	margin-bottom: var(--xz-sp-6);
+}
+
+.xz-adm-split {
+	display: grid;
+	grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+	gap: var(--xz-sp-5);
+	align-items: start;
+}
+
+@media (max-width: 1100px) {
+	.xz-adm-split {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+.xz-adm-note {
+	color: var(--xz-ink-2);
+	font-size: var(--xz-fs-sm);
+	line-height: 1.6;
+}
+
+.xz-adm-metrics {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+	gap: var(--xz-sp-4) var(--xz-sp-5);
+}
+
+.xz-adm-meter {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.xz-adm-meter__label {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: var(--xz-sp-2);
+	font-size: var(--xz-fs-sm);
+	color: var(--xz-ink-2);
+}
+
+.xz-adm-meter__value {
+	font-family: var(--xz-font-mono);
+	color: var(--xz-ink);
+}
+
+/* ── 需关注项 ─────────────────────────────────────────────────────── */
+.xz-adm-attention {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-2);
+}
+
+.xz-adm-attention__row {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--xz-sp-3);
+	padding: var(--xz-sp-3);
+	border: 1px solid var(--xz-line);
+	border-radius: var(--xz-r);
+	background: var(--xz-surface-2);
+}
+
+.xz-adm-attention__row[data-severity="danger"] {
+	border-color: rgba(218, 62, 55, 0.36);
+	background: var(--xz-danger-bg);
+}
+
+.xz-adm-attention__row[data-severity="warn"] {
+	border-color: var(--xz-gold-a30);
+	background: var(--xz-warn-bg);
+}
+
+.xz-adm-attention__main {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.xz-adm-attention__title {
+	font-weight: 600;
+	color: var(--xz-ink);
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+	flex-wrap: wrap;
+}
+
+.xz-adm-attention__meta {
+	margin-top: 2px;
+	color: var(--xz-ink-3);
+	font-size: var(--xz-fs-xs);
+	word-break: break-word;
+}
+
+/* ── 表单 ─────────────────────────────────────────────────────────── */
+.xz-adm-form-actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: var(--xz-sp-2);
+	margin-top: var(--xz-sp-5);
+}
+
+.xz-adm-filter-expr .xz-input {
+	min-width: 320px;
+	font-family: var(--xz-font-mono);
+}
+
+/* 上传控件（原生 file input，无第三方组件库可用） */
+.xz-adm-file {
+	display: block;
+	width: 100%;
+	padding: var(--xz-sp-3);
+	border: 1px dashed var(--xz-line-strong);
+	border-radius: var(--xz-r);
+	background: var(--xz-surface-2);
+	color: var(--xz-ink-2);
+	font-size: var(--xz-fs-sm);
+}
+
+.xz-adm-file:focus-visible {
+	border-color: var(--xz-crimson);
+}
+
+/* ── 讨论详情 / 评论 ──────────────────────────────────────────────── */
+.xz-adm-discussion__head {
+	border-bottom: 1px solid var(--xz-line-soft);
+	padding-bottom: var(--xz-sp-3);
+	margin-bottom: var(--xz-sp-3);
+}
+
+.xz-adm-discussion__title {
+	font-family: var(--xz-font-serif);
+	font-size: var(--xz-fs-xl);
+	color: var(--xz-ink);
+	margin: 0 0 6px;
+}
+
+.xz-adm-comment__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--xz-sp-3);
+}
+
+.xz-adm-comment__body {
+	margin-top: 4px;
+	white-space: pre-wrap;
+	word-break: break-word;
+	color: var(--xz-ink-2);
+	font-size: var(--xz-fs-sm);
+}
+
+/* ── 前端选择器 ───────────────────────────────────────────────────── */
+.xz-adm-frontend {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: var(--xz-sp-4);
+	padding: var(--xz-sp-4);
+	border: 1px solid var(--xz-line);
+	border-radius: var(--xz-r);
+	background: var(--xz-surface-2);
+}
+
+.xz-adm-frontend + .xz-adm-frontend {
+	margin-top: var(--xz-sp-3);
+}
+
+.xz-adm-frontend[data-active="true"] {
+	border-color: var(--xz-crimson-a40);
+	background: var(--xz-crimson-a08);
+	box-shadow: inset 3px 0 0 var(--xz-crimson);
+}
+
+.xz-adm-frontend__name {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+	flex-wrap: wrap;
+	font-weight: 600;
+	color: var(--xz-ink);
+}
+
+.xz-adm-frontend__meta {
+	margin-top: 4px;
+	color: var(--xz-ink-3);
+	font-size: var(--xz-fs-xs);
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.xz-adm-frontend__versions {
+	margin-top: var(--xz-sp-2);
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--xz-sp-1);
+}
+
+/* ── 磁盘 / 网卡小表 ─────────────────────────────────────────────── */
+.xz-adm-disk {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-2);
+}
+
+.xz-adm-disk__row {
+	display: grid;
+	grid-template-columns: minmax(120px, 1fr) minmax(0, 1.2fr);
+	gap: var(--xz-sp-3);
+	align-items: center;
+}
+
+.xz-adm-disk__meta {
+	color: var(--xz-ink-3);
+	font-size: var(--xz-fs-xs);
+	font-family: var(--xz-font-mono);
+}
+
+/* ── 空态补充 ─────────────────────────────────────────────────────── */
+.xz-adm-inline-empty {
+	color: var(--xz-ink-3);
+	font-size: var(--xz-fs-sm);
+	padding: var(--xz-sp-3) 0;
+}

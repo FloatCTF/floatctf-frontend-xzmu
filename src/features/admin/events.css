@@ -1,0 +1,342 @@
+/* ============================================================================
+ * 管理控制台 · 赛事与资产域（`.xz-aev-` 前缀）
+ *
+ * 只补充通用设计系统（`src/styles/*.css`）没有的布局；颜色一律走 CSS 变量，
+ * 不写死 hex。赛事控制台标签页复用 `.xz-tabs` / `.xz-tab`。
+ * ========================================================================= */
+
+.xz-aev-pagehead {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--xz-sp-4);
+	flex-wrap: wrap;
+}
+
+.xz-aev-toolbar {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+	flex-wrap: wrap;
+	margin-bottom: var(--xz-sp-4);
+}
+
+.xz-aev-toolbar--end {
+	margin-left: auto;
+}
+
+.xz-aev-grid2 {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: var(--xz-sp-4);
+}
+
+.xz-aev-grid3 {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: var(--xz-sp-3);
+}
+
+.xz-aev-col {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-4);
+}
+
+.xz-aev-inline {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+	flex-wrap: wrap;
+}
+
+.xz-aev-inline--end {
+	justify-content: flex-end;
+}
+
+.xz-aev-badges {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	flex-wrap: wrap;
+}
+
+.xz-aev-flow {
+	display: flex;
+	gap: var(--xz-sp-2);
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.xz-aev-note {
+	font-size: var(--xz-fs-md);
+	color: var(--xz-ink-3);
+	line-height: 1.7;
+}
+
+.xz-aev-rows {
+	display: grid;
+	gap: 6px;
+	margin: 0;
+}
+
+.xz-aev-rows__row {
+	display: flex;
+	align-items: baseline;
+	gap: var(--xz-sp-3);
+	font-size: var(--xz-fs-base);
+}
+
+.xz-aev-rows__row dt {
+	min-width: 108px;
+	color: var(--xz-ink-3);
+	font-size: var(--xz-fs-md);
+}
+
+.xz-aev-rows__row dd {
+	margin: 0;
+	min-width: 0;
+	word-break: break-word;
+}
+
+.xz-aev-rowactions {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+}
+
+.xz-aev-jsonfield {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.xz-aev-jsonfield__clear {
+	font-size: var(--xz-fs-md);
+	color: var(--xz-ink-2);
+}
+
+.xz-aev-report {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-2);
+}
+
+.xz-aev-report__item {
+	display: flex;
+	gap: var(--xz-sp-2);
+	align-items: flex-start;
+	padding: var(--xz-sp-3);
+	border-radius: var(--xz-r-sm);
+	border: 1px solid var(--xz-line-soft);
+	background: var(--xz-surface);
+	font-size: var(--xz-fs-md);
+}
+
+.xz-aev-report__item[data-tone="danger"] {
+	border-color: rgba(218, 62, 55, 0.32);
+	background: var(--xz-danger-bg);
+	color: var(--xz-danger);
+}
+
+.xz-aev-report__item[data-tone="info"] {
+	border-color: rgba(13, 85, 153, 0.24);
+	background: var(--xz-info-bg);
+	color: var(--xz-info);
+}
+
+.xz-aev-report__text {
+	margin-top: 3px;
+	color: var(--xz-ink);
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.xz-aev-report__ok {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: var(--xz-fs-md);
+	color: var(--xz-ok);
+}
+
+/* 分栏选择（加入题目 / 用户 / GameBox） */
+.xz-aev-pick {
+	max-height: 320px;
+	overflow-y: auto;
+	border: 1px solid var(--xz-line-soft);
+	border-radius: var(--xz-r-sm);
+	background: var(--xz-surface);
+}
+
+.xz-aev-pick__row {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-3);
+	padding: 7px var(--xz-sp-3);
+	border-bottom: 1px solid var(--xz-line-soft);
+	font-size: var(--xz-fs-md);
+}
+
+.xz-aev-pick__row:last-child {
+	border-bottom: 0;
+}
+
+.xz-aev-pick__main {
+	min-width: 0;
+	flex: 1 1 auto;
+}
+
+.xz-aev-pick__meta {
+	color: var(--xz-ink-3);
+	font-size: var(--xz-fs-sm);
+	margin-top: 2px;
+}
+
+.xz-aev-pick__aside {
+	margin-left: auto;
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+}
+
+/* 统计小卡（数据大屏 / 网络容量） */
+.xz-aev-stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	gap: var(--xz-sp-3);
+}
+
+.xz-aev-cap {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	padding: var(--xz-sp-3);
+	border: 1px solid var(--xz-line-soft);
+	border-radius: var(--xz-r-sm);
+	background: var(--xz-surface);
+}
+
+.xz-aev-cap__k {
+	font-size: var(--xz-fs-sm);
+	color: var(--xz-ink-3);
+}
+
+.xz-aev-cap__v {
+	font-family: var(--xz-font-mono);
+	font-size: var(--xz-fs-lg);
+	font-weight: 700;
+	color: var(--xz-crimson);
+}
+
+/* 网络分配只读表 */
+.xz-aev-netgrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+	gap: var(--xz-sp-3);
+}
+
+.xz-aev-netcell {
+	border: 1px solid var(--xz-line-soft);
+	border-radius: var(--xz-r-sm);
+	padding: var(--xz-sp-3);
+	background: var(--xz-surface);
+}
+
+.xz-aev-netcell__k {
+	font-size: var(--xz-fs-sm);
+	color: var(--xz-ink-3);
+	margin-bottom: 4px;
+}
+
+.xz-aev-netcell__v {
+	font-family: var(--xz-font-mono);
+	font-size: var(--xz-fs-md);
+	word-break: break-all;
+}
+
+.xz-aev-danger {
+	margin-top: var(--xz-sp-4);
+}
+
+/* 标签页顶部条：说明 + 关键状态 */
+.xz-aev-mono {
+	font-family: var(--xz-font-mono);
+	word-break: break-all;
+}
+
+.xz-aev-score {
+	font-family: var(--xz-font-mono);
+	font-weight: 700;
+	color: var(--xz-crimson);
+	font-variant-numeric: tabular-nums;
+}
+
+.xz-aev-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	padding: 2px 8px;
+	border-radius: var(--xz-r-pill);
+	border: 1px solid var(--xz-line);
+	background: var(--xz-paper-3);
+	font-size: var(--xz-fs-sm);
+	font-family: var(--xz-font-mono);
+}
+
+.xz-aev-emptyline {
+	padding: var(--xz-sp-4);
+	text-align: center;
+	color: var(--xz-ink-3);
+	font-size: var(--xz-fs-md);
+}
+
+/* 图表：纯 CSS 横向条形（数据大屏题目解出率） */
+.xz-aev-bars {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-2);
+}
+
+.xz-aev-bars__row {
+	display: grid;
+	grid-template-columns: minmax(120px, 220px) minmax(0, 1fr) 84px;
+	align-items: center;
+	gap: var(--xz-sp-3);
+	font-size: var(--xz-fs-md);
+}
+
+.xz-aev-bars__track {
+	height: 10px;
+	border-radius: var(--xz-r-pill);
+	background: var(--xz-paper-3);
+	overflow: hidden;
+}
+
+.xz-aev-bars__fill {
+	height: 100%;
+	border-radius: var(--xz-r-pill);
+	background: var(--xz-crimson);
+	transition: width var(--xz-dur) var(--xz-ease);
+}
+
+.xz-aev-bars__fill--gold {
+	background: var(--xz-gold);
+}
+
+.xz-aev-bars__num {
+	text-align: right;
+	font-family: var(--xz-font-mono);
+	color: var(--xz-ink-2);
+}
+
+@media (max-width: 720px) {
+	.xz-aev-bars__row {
+		grid-template-columns: minmax(0, 1fr) 70px;
+	}
+
+	.xz-aev-bars__track {
+		display: none;
+	}
+}

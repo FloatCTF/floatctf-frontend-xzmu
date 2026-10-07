@@ -1,0 +1,326 @@
+/* ============================================================================
+ * Jeopardy 功能域样式（类名前缀 `.xz-jeo-`）
+ *
+ * 只补充设计系统里没有的形态；颜色一律走 `src/styles/tokens.css` 的 CSS 变量，
+ * 不写内联 hex。所有选择器都带 `.xz-jeo-` 前缀，避免与其它功能域冲突。
+ * ========================================================================= */
+
+/* ── 题目卡片（.xz-chcard 的可点击主体）────────────────────────────── */
+.xz-jeo-tile__main {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-2);
+	width: 100%;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: inherit;
+	font: inherit;
+	text-align: left;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.xz-jeo-tile__main:hover {
+	text-decoration: none;
+}
+
+.xz-jeo-tile__meta {
+	font-size: var(--xz-fs-xs);
+	color: var(--xz-ink-3);
+	border-top: 1px dashed var(--xz-line-soft);
+	padding-top: var(--xz-sp-2);
+}
+
+.xz-jeo-tile__actions {
+	justify-content: flex-end;
+}
+
+/* ── 附件 ─────────────────────────────────────────────────────────── */
+.xz-jeo-attach {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+	padding: 9px var(--xz-sp-3);
+	border: 1px solid var(--xz-line);
+	border-radius: var(--xz-r);
+	background: var(--xz-surface-2);
+	color: var(--xz-ink);
+	text-decoration: none;
+	transition: border-color var(--xz-dur) var(--xz-ease), background var(--xz-dur) var(--xz-ease);
+}
+
+.xz-jeo-attach:hover {
+	border-color: var(--xz-crimson-a40);
+	background: var(--xz-crimson-a08);
+	text-decoration: none;
+}
+
+/* ── 实例生命周期（ChallengeRunner）───────────────────────────────── */
+.xz-jeo-runner {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-3);
+}
+
+.xz-jeo-runner__head {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+	flex-wrap: wrap;
+}
+
+.xz-jeo-runner__notice {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-2);
+}
+
+.xz-jeo-runner__empty {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--xz-sp-3);
+	flex-wrap: wrap;
+	padding: var(--xz-sp-3) var(--xz-sp-4);
+	border: 1px dashed var(--xz-line);
+	border-radius: var(--xz-r);
+	background: var(--xz-surface-2);
+}
+
+.xz-jeo-inst {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-4);
+}
+
+.xz-jeo-inst__content,
+.xz-jeo-inst__actions {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-2);
+}
+
+.xz-jeo-inst__label {
+	font-size: var(--xz-fs-sm);
+	font-weight: 600;
+	color: var(--xz-ink-2);
+}
+
+.xz-jeo-inst__actions {
+	align-items: flex-start;
+	border-top: 1px solid var(--xz-line-soft);
+	padding-top: var(--xz-sp-3);
+}
+
+/* 实例 content 若是 HTML：只放进全限制的 sandbox iframe（见 components.tsx 的说明）。 */
+.xz-jeo-frame {
+	width: 100%;
+	height: 340px;
+	border: 1px solid var(--xz-line);
+	border-radius: var(--xz-r);
+	background: var(--xz-surface);
+}
+
+.xz-jeo-flag {
+	display: flex;
+	align-items: flex-end;
+	gap: var(--xz-sp-3);
+}
+
+.xz-jeo-flag > .xz-field {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.xz-jeo-countdown {
+	font-family: var(--xz-font-mono);
+	font-variant-numeric: tabular-nums;
+	color: var(--xz-ink-2);
+	white-space: nowrap;
+}
+
+.xz-jeo-countdown--expired {
+	color: var(--xz-danger);
+	font-weight: 600;
+}
+
+/* ── 赛事题目统计条 ───────────────────────────────────────────────── */
+.xz-jeo-stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(152px, 1fr));
+	gap: var(--xz-sp-3);
+	margin-bottom: var(--xz-sp-4);
+}
+
+/* ── 积分榜（动态题列）────────────────────────────────────────────── */
+.xz-jeo-boardwrap {
+	overflow-x: auto;
+	max-width: 100%;
+}
+
+.xz-jeo-boardwrap .xz-board th,
+.xz-jeo-boardwrap .xz-board td {
+	white-space: nowrap;
+}
+
+/* 首列（名次）吸附在左侧，横向滚动时仍能看到是谁。 */
+.xz-jeo-boardwrap .xz-board th:nth-child(1),
+.xz-jeo-boardwrap .xz-board td:nth-child(1) {
+	position: sticky;
+	left: 0;
+	z-index: 2;
+	background: var(--xz-surface);
+}
+
+.xz-jeo-boardwrap .xz-board thead th:nth-child(1) {
+	z-index: 3;
+	background: var(--xz-paper-3);
+}
+
+.xz-jeo-boardwrap .xz-board .xz-board__row--me td:nth-child(1) {
+	background: var(--xz-gold-a16);
+}
+
+.xz-jeo-board__ch {
+	min-width: 96px;
+	text-align: center;
+}
+
+.xz-jeo-board__cell {
+	text-align: center;
+}
+
+.xz-jeo-board__name {
+	font-weight: 600;
+	margin-right: var(--xz-sp-2);
+}
+
+.xz-jeo-check {
+	display: inline-flex;
+	align-items: center;
+	color: var(--xz-ok);
+}
+
+.xz-jeo-legend {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-4);
+	flex-wrap: wrap;
+	margin-bottom: var(--xz-sp-3);
+	font-size: var(--xz-fs-md);
+	color: var(--xz-ink-2);
+}
+
+/* ── 趋势图（纯 CSS 堆叠柱）───────────────────────────────────────── */
+/* 复用 .xz-trend 系列的外形，只把内部结构改成「底部堆叠 + 时间轴标签」。 */
+.xz-jeo-trend .xz-trend__col {
+	gap: var(--xz-sp-1);
+}
+
+.xz-jeo-trend .xz-trend__stack {
+	height: auto;
+	flex: 1 1 auto;
+	min-height: 0;
+	flex-direction: column-reverse;
+	justify-content: flex-start;
+}
+
+.xz-jeo-trend .xz-trend__seg {
+	min-height: 0;
+}
+
+.xz-jeo-trend .xz-trend__label {
+	min-height: 14px;
+}
+
+.xz-jeo-trendlegend {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-4);
+	flex-wrap: wrap;
+	margin-bottom: var(--xz-sp-3);
+}
+
+.xz-jeo-legend__item {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+	font-size: var(--xz-fs-md);
+	color: var(--xz-ink-2);
+}
+
+.xz-jeo-swatch {
+	display: inline-block;
+	width: 11px;
+	height: 11px;
+	border-radius: 2px;
+	flex: 0 0 auto;
+}
+
+/* 8 色主体调色板：全部来自设计令牌，深浅模式都可用。 */
+.xz-trend__seg.xz-jeo-trend__seg--0,
+.xz-jeo-swatch.xz-jeo-trend__seg--0 {
+	background: var(--xz-crimson);
+}
+
+.xz-trend__seg.xz-jeo-trend__seg--1,
+.xz-jeo-swatch.xz-jeo-trend__seg--1 {
+	background: var(--xz-gold);
+}
+
+.xz-trend__seg.xz-jeo-trend__seg--2,
+.xz-jeo-swatch.xz-jeo-trend__seg--2 {
+	background: var(--xz-teal);
+}
+
+.xz-trend__seg.xz-jeo-trend__seg--3,
+.xz-jeo-swatch.xz-jeo-trend__seg--3 {
+	background: var(--xz-info);
+}
+
+.xz-trend__seg.xz-jeo-trend__seg--4,
+.xz-jeo-swatch.xz-jeo-trend__seg--4 {
+	background: var(--xz-ok);
+}
+
+.xz-trend__seg.xz-jeo-trend__seg--5,
+.xz-jeo-swatch.xz-jeo-trend__seg--5 {
+	background: var(--xz-warn);
+}
+
+.xz-trend__seg.xz-jeo-trend__seg--6,
+.xz-jeo-swatch.xz-jeo-trend__seg--6 {
+	background: var(--xz-danger);
+}
+
+.xz-trend__seg.xz-jeo-trend__seg--7,
+.xz-jeo-swatch.xz-jeo-trend__seg--7 {
+	background: var(--xz-ink-3);
+}
+
+/* ── 公告 / 实例说明 / 详情布局 ───────────────────────────────────── */
+.xz-jeo-ann__title {
+	font-weight: 600;
+	font-size: var(--xz-fs-lg);
+	line-height: 1.4;
+}
+
+.xz-jeo-instnote {
+	padding: var(--xz-sp-3) var(--xz-sp-4) 0;
+}
+
+.xz-jeo-detail {
+	align-items: start;
+}
+
+@media (max-width: 768px) {
+	.xz-jeo-flag {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.xz-jeo-frame {
+		height: 240px;
+	}
+}

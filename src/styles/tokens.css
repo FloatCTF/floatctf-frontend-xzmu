@@ -1,0 +1,151 @@
+/* ============================================================================
+ * 设计令牌 —— 「民大红 · 鎏金」
+ *
+ * 取值来源（均为对两个真实站点的实测，不是臆造）：
+ *   - portal.xzmu.edu.cn 顶栏 / 左栏 live getComputedStyle → rgb(113,35,35) = #712323
+ *   - portal.xzmu.edu.cn 次级主色（hover / 激活）        → rgb(141,48,51) = #8d3033
+ *   - www.xzmu.edu.cn/style/index.css                    → #481c1c / #611212
+ *   - www.xzmu.edu.cn 鎏金强调                           → #b0915d / #d9bb64 / #fbc937
+ *   - www.xzmu.edu.cn 暖纸底                             → #f8f8f6 / #fcf7f0 / #f3f0e9
+ *   - portal 信息色板                                    → #f9ab22 / #228b22 / #3e8b94 / #da3e37
+ * 证据截图见 docs/design-ref/。
+ * ========================================================================= */
+
+:root {
+	/* ── 主色（校色）───────────────────────────────────────────────── */
+	--xz-crimson: #712323;
+	--xz-crimson-hi: #8d3033;
+	--xz-crimson-lo: #5a1a1c;
+	--xz-crimson-deep: #481c1c;
+	--xz-crimson-ink: #380f11;
+	--xz-crimson-a08: rgba(113, 35, 35, 0.08);
+	--xz-crimson-a14: rgba(113, 35, 35, 0.14);
+	--xz-crimson-a24: rgba(113, 35, 35, 0.24);
+	--xz-crimson-a40: rgba(113, 35, 35, 0.4);
+
+	/* ── 鎏金强调 ──────────────────────────────────────────────────── */
+	--xz-gold: #b0915d;
+	--xz-gold-hi: #d9bb64;
+	--xz-gold-lo: #8a6f42;
+	--xz-gold-a16: rgba(176, 145, 93, 0.16);
+	--xz-gold-a30: rgba(176, 145, 93, 0.3);
+
+	/* ── 语义色 ────────────────────────────────────────────────────── */
+	--xz-ok: #228b22;
+	--xz-ok-bg: rgba(34, 139, 34, 0.1);
+	--xz-warn: #c8860d;
+	--xz-warn-bg: rgba(249, 171, 34, 0.14);
+	--xz-danger: #da3e37;
+	--xz-danger-bg: rgba(218, 62, 55, 0.1);
+	--xz-info: #0d5599;
+	--xz-info-bg: rgba(13, 85, 153, 0.09);
+	--xz-teal: #3e8b94;
+
+	/* ── 表面与文字 ────────────────────────────────────────────────── */
+	--xz-paper: #fcf7f0;
+	--xz-paper-2: #f8f8f6;
+	--xz-paper-3: #f3f0e9;
+	--xz-surface: #ffffff;
+	--xz-surface-2: #fdfbf8;
+	--xz-line: #e7dbc8;
+	--xz-line-soft: #efe8dc;
+	--xz-line-strong: #ddd0b8;
+
+	--xz-ink: #2b2422;
+	--xz-ink-2: #5c5250;
+	--xz-ink-3: #8a807c;
+	--xz-ink-4: #a99f9a;
+	--xz-on-crimson: #fff8f2;
+
+	/* ── 排版 ──────────────────────────────────────────────────────── */
+	--xz-font: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC",
+		"Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+		sans-serif;
+	--xz-font-serif: "Source Han Serif SC", "Noto Serif SC", "Songti SC", STSong, SimSun, Georgia,
+		serif;
+	--xz-font-mono: ui-monospace, "JetBrains Mono", "Cascadia Mono", "SF Mono", Menlo, Consolas,
+		"Liberation Mono", monospace;
+
+	--xz-fs-xs: 11px;
+	--xz-fs-sm: 12px;
+	--xz-fs-md: 13px;
+	--xz-fs-base: 14px;
+	--xz-fs-lg: 16px;
+	--xz-fs-xl: 19px;
+	--xz-fs-2xl: 24px;
+	--xz-fs-3xl: 30px;
+
+	/* ── 间距 / 圆角 / 阴影 ────────────────────────────────────────── */
+	--xz-sp-1: 4px;
+	--xz-sp-2: 8px;
+	--xz-sp-3: 12px;
+	--xz-sp-4: 16px;
+	--xz-sp-5: 20px;
+	--xz-sp-6: 24px;
+	--xz-sp-8: 32px;
+	--xz-sp-10: 40px;
+	--xz-sp-12: 48px;
+
+	--xz-r-sm: 4px;
+	--xz-r: 6px;
+	--xz-r-lg: 10px;
+	--xz-r-pill: 999px;
+
+	--xz-shadow-1: 0 1px 2px rgba(72, 28, 28, 0.06);
+	--xz-shadow-2: 0 3px 16px rgba(113, 35, 35, 0.1);
+	--xz-shadow-3: 0 10px 32px rgba(72, 28, 28, 0.16);
+	--xz-shadow-4: 0 24px 64px rgba(56, 15, 17, 0.28);
+
+	--xz-rail-w: 208px;
+	--xz-rail-w-collapsed: 60px;
+	--xz-topbar-h: 58px;
+	--xz-inspector-w: 400px;
+	--xz-content-max: 1560px;
+
+	--xz-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+	--xz-dur: 170ms;
+	--xz-z-drawer: 60;
+	--xz-z-modal: 70;
+	--xz-z-toast: 80;
+	--xz-z-palette: 90;
+}
+
+/*
+ * 深色模式：只在**表面与文字**上换令牌，主色与鎏金保持一致，
+ * 保证品牌识别在两种模式下都不变。
+ */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--xz-paper: #17100f;
+		--xz-paper-2: #1c1413;
+		--xz-paper-3: #221917;
+		--xz-surface: #221917;
+		--xz-surface-2: #1d1514;
+		--xz-line: #3a2a26;
+		--xz-line-soft: #2e211e;
+		--xz-line-strong: #4a352f;
+
+		--xz-ink: #f4ece6;
+		--xz-ink-2: #c9bab3;
+		--xz-ink-3: #9c8b84;
+		--xz-ink-4: #7c6b65;
+
+		--xz-crimson: #a13a3a;
+		--xz-crimson-hi: #b84a45;
+		--xz-crimson-lo: #8a2c2c;
+		--xz-crimson-deep: #2a1412;
+		--xz-crimson-ink: #170908;
+		--xz-crimson-a08: rgba(161, 58, 58, 0.16);
+		--xz-crimson-a14: rgba(161, 58, 58, 0.22);
+		--xz-crimson-a24: rgba(161, 58, 58, 0.34);
+
+		--xz-gold: #c9a86f;
+		--xz-gold-hi: #e3c882;
+		--xz-info: #6fb0f0;
+
+		--xz-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+		--xz-shadow-2: 0 3px 16px rgba(0, 0, 0, 0.45);
+		--xz-shadow-3: 0 10px 32px rgba(0, 0, 0, 0.5);
+		--xz-shadow-4: 0 24px 64px rgba(0, 0, 0, 0.6);
+	}
+}

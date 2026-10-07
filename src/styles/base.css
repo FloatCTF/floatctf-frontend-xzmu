@@ -1,0 +1,222 @@
+/* ============================================================================
+ * 基础层：reset、排版、焦点、滚动条、工具类
+ * ========================================================================= */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.xz-root {
+	/* 前端运行时把根节点交给我们，这里建立独立的排版上下文。 */
+	font-family: var(--xz-font);
+	font-size: var(--xz-fs-base);
+	line-height: 1.6;
+	color: var(--xz-ink);
+	background: var(--xz-paper-2);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-size-adjust: 100%;
+}
+
+.xz-root *,
+.xz-root *::before,
+.xz-root *::after {
+	/* 前端自己的组件全部走自研样式，避免被站点其它样式影响。 */
+	font-family: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	font-weight: 600;
+	line-height: 1.32;
+	color: var(--xz-ink);
+}
+
+p {
+	margin: 0;
+}
+
+a {
+	color: var(--xz-crimson);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+button,
+input,
+select,
+textarea {
+	font: inherit;
+	color: inherit;
+}
+
+ul,
+ol {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+img,
+svg {
+	max-width: 100%;
+}
+
+/* ── 焦点可见性（键盘可达性的基础）────────────────────────────────── */
+.xz-root :focus-visible {
+	outline: 2px solid var(--xz-crimson);
+	outline-offset: 2px;
+	border-radius: var(--xz-r-sm);
+}
+
+.xz-root :focus:not(:focus-visible) {
+	outline: none;
+}
+
+/* ── 滚动条 ───────────────────────────────────────────────────────── */
+.xz-root * {
+	scrollbar-width: thin;
+	scrollbar-color: var(--xz-line-strong) transparent;
+}
+
+.xz-root *::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+.xz-root *::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.xz-root *::-webkit-scrollbar-thumb {
+	background: var(--xz-line-strong);
+	border: 3px solid transparent;
+	border-radius: var(--xz-r-pill);
+	background-clip: content-box;
+}
+
+.xz-root *::-webkit-scrollbar-thumb:hover {
+	background: var(--xz-gold);
+	background-clip: content-box;
+}
+
+/* ── 屏幕阅读器专用 ───────────────────────────────────────────────── */
+.xz-sr {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* ── 工具类（少量、语义化的）──────────────────────────────────────── */
+.xz-row {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+}
+
+.xz-row-between {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--xz-sp-3);
+}
+
+.xz-col {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-2);
+}
+
+.xz-wrap {
+	flex-wrap: wrap;
+}
+
+.xz-grow {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.xz-mono {
+	font-family: var(--xz-font-mono);
+	font-variant-numeric: tabular-nums;
+}
+
+.xz-serif {
+	font-family: var(--xz-font-serif);
+}
+
+.xz-muted {
+	color: var(--xz-ink-3);
+}
+
+.xz-dim {
+	color: var(--xz-ink-2);
+}
+
+.xz-xs {
+	font-size: var(--xz-fs-sm);
+}
+
+.xz-truncate {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.xz-clamp-2 {
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.xz-clamp-3 {
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.xz-nowrap {
+	white-space: nowrap;
+}
+
+.xz-break {
+	word-break: break-word;
+	overflow-wrap: anywhere;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.xz-root *,
+	.xz-root *::before,
+	.xz-root *::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+		scroll-behavior: auto !important;
+	}
+}

@@ -1,0 +1,20 @@
+# 依赖与构建产物
+node_modules/
+dist/
+*.tsbuildinfo
+.vite/
+
+# 日志与本地环境
+*.log
+.env
+.env.*
+!.env.example
+
+# 编辑器 / 系统
+.DS_Store
+.idea/
+.vscode/
+
+# 本地验收与临时脚本
+/tmp/
+*.tar.gz

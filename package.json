@@ -1,0 +1,33 @@
+{
+	"name": "@floatctf/frontend-xzmu",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"description": "西藏民族大学主题的 FloatCTF 可插拔前端（完整替换）",
+	"license": "AGPL-3.0-only",
+	"scripts": {
+		"dev": "vite --port 13200",
+		"start": "vite --port 13200",
+		"build": "vite build && tsc --noEmit",
+		"build:artifact": "vite build",
+		"typecheck": "tsc --noEmit",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"@floatctf/frontend-runtime": "workspace:*",
+		"@floatctf/react": "workspace:*",
+		"@floatctf/sdk": "workspace:*",
+		"@tanstack/react-query": "^5.66.5",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"react-markdown": "^10.1.0",
+		"remark-gfm": "^4.0.1"
+	},
+	"devDependencies": {
+		"@types/react": "^19.0.8",
+		"@types/react-dom": "^19.0.3",
+		"@vitejs/plugin-react": "^4.3.4",
+		"typescript": "^5.7.2",
+		"vite": "^6.3.5"
+	}
+}

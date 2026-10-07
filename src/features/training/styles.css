@@ -1,0 +1,34 @@
+/* ============================================================================
+ * AWDP Training Ground（练习）—— 局部样式
+ *
+ * 前缀 `.xz-tr-`（唯一）。共享形态全部复用 `.xz-awdp-*` 与设计系统既有类，
+ * 这里只补训练目录 / Run 工作台特有的少量结构。
+ * ========================================================================= */
+
+.xz-tr-stack {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-4);
+}
+
+.xz-tr-name {
+	min-width: 0;
+	max-width: 460px;
+}
+
+.xz-tr-res {
+	color: var(--xz-ink-3);
+	white-space: nowrap;
+}
+
+.xz-tr-hint {
+	margin-left: var(--xz-sp-3);
+	font-size: var(--xz-fs-sm);
+	font-weight: 400;
+	color: var(--xz-ink-3);
+}
+
+/* 目录行里的操作列不换行 */
+.xz-tr-actions {
+	white-space: nowrap;
+}

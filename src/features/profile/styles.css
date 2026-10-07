@@ -1,0 +1,43 @@
+/* ============================================================================
+ * 「我的」功能域样式（前缀 `.xz-me-`）
+ *
+ * 只补充设计系统里没有的部分：资料页的两栏布局、头像区块、工具条提示。
+ * `.xz-card` / `.xz-kv` / `.xz-danger-zone` / `.xz-filters` 全部复用现有设计系统。
+ * ========================================================================= */
+
+/* ── 两栏布局：左（头像 / 账号信息 / 题解入口 / 退出） + 右（修改表单）────── */
+.xz-me-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+	gap: var(--xz-sp-4);
+	align-items: start;
+}
+
+.xz-me-avatar {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-4);
+}
+
+.xz-me-avatar .xz-avatar--lg {
+	width: 72px;
+	height: 72px;
+	font-size: var(--xz-fs-2xl);
+}
+
+.xz-me-hint {
+	margin-left: auto;
+	color: var(--xz-ink-3);
+	font-size: var(--xz-fs-sm);
+	white-space: nowrap;
+}
+
+.xz-me-banner {
+	margin-bottom: var(--xz-sp-4);
+}
+
+@media (max-width: 1023px) {
+	.xz-me-grid {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}

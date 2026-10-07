@@ -1,0 +1,202 @@
+/* ============================================================================
+ * AWD 靶场面板（选手端）—— 类名前缀 `.xz-awd-`，只作用于本功能域。
+ *
+ * 复用已有设计系统类：`.xz-split` / `.xz-col` / `.xz-gbgrid` / `.xz-gb` /
+ * `.xz-board` / `.xz-cred` / `.xz-secret` / `.xz-phase` / `.xz-flagbar` /
+ * `.xz-feed` / `.xz-list` / `.xz-codeblock`。这里只补充缺失的排版与响应式规则。
+ * 颜色一律走 CSS 变量（`var(--xz-*)`），不写死色值。
+ * ========================================================================= */
+
+.xz-awd {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-4);
+}
+
+/* 主列 / 侧列都是纵向卡片栈，间距比通用 `.xz-col` 宽松。 */
+.xz-awd-stack {
+	gap: var(--xz-sp-4);
+}
+
+.xz-awd-notice {
+	margin-bottom: var(--xz-sp-3);
+}
+
+.xz-awd-pad {
+	padding: var(--xz-sp-4);
+}
+
+/* ── 实时链路：状态行 + 状态点 ─────────────────────────────────────── */
+
+.xz-awd-stream {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-3);
+}
+
+.xz-awd-live {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+	flex-wrap: wrap;
+	padding: 7px var(--xz-sp-4);
+	border: 1px solid var(--xz-line-soft);
+	border-left: 3px solid var(--xz-ink-4);
+	border-radius: var(--xz-r);
+	background: var(--xz-surface-2);
+	font-size: var(--xz-fs-md);
+}
+
+.xz-awd-live__dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var(--xz-ink-4);
+	flex: 0 0 auto;
+}
+
+.xz-awd-live[data-state="connected"] {
+	border-left-color: var(--xz-ok);
+}
+
+.xz-awd-live[data-state="connected"] .xz-awd-live__dot {
+	background: var(--xz-ok);
+}
+
+.xz-awd-live[data-state="connecting"] .xz-awd-live__dot,
+.xz-awd-live[data-state="reconnecting"] .xz-awd-live__dot {
+	background: var(--xz-warn);
+}
+
+.xz-awd-live[data-state="reconnecting"] {
+	border-left-color: var(--xz-warn);
+}
+
+.xz-awd-live[data-state="auth_error"],
+.xz-awd-live[data-state="error"] {
+	border-left-color: var(--xz-danger);
+}
+
+.xz-awd-live[data-state="auth_error"] .xz-awd-live__dot,
+.xz-awd-live[data-state="error"] .xz-awd-live__dot {
+	background: var(--xz-danger);
+}
+
+/* ── 状态总览 ─────────────────────────────────────────────────────── */
+
+.xz-awd-status {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+	gap: var(--xz-sp-3);
+	align-items: center;
+	margin-bottom: var(--xz-sp-3);
+}
+
+/* AWD 的 phase 取值与 AWDP 不同，这里只在本面板内补色（不改 `src/styles/*`）。 */
+.xz-awd .xz-phase[data-phase="attack"] {
+	background: var(--xz-danger-bg);
+	color: var(--xz-danger);
+	border-color: var(--xz-crimson-a24);
+}
+
+.xz-awd .xz-phase[data-phase="hardening"] {
+	background: var(--xz-info-bg);
+	color: var(--xz-info);
+	border-color: var(--xz-crimson-a14);
+}
+
+.xz-awd .xz-phase[data-phase="pause"] {
+	background: var(--xz-warn-bg);
+	color: var(--xz-warn);
+	border-color: var(--xz-crimson-a14);
+}
+
+/* ── 说明文字 ─────────────────────────────────────────────────────── */
+
+.xz-awd-hint {
+	margin: var(--xz-sp-2) 0 0;
+	font-size: var(--xz-fs-sm);
+	color: var(--xz-ink-3);
+	line-height: 1.6;
+}
+
+/* ── 积分榜 / 表格滚动 ────────────────────────────────────────────── */
+
+.xz-awd-scroll {
+	overflow-x: auto;
+}
+
+.xz-awd-num {
+	text-align: right;
+	font-variant-numeric: tabular-nums;
+}
+
+/* ── 接入凭据（WireGuard / SSH）───────────────────────────────────── */
+
+.xz-awd-credgrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: var(--xz-sp-4);
+	align-items: start;
+}
+
+.xz-awd-cred {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-3);
+	min-width: 0;
+	padding: var(--xz-sp-4);
+	border: 1px solid var(--xz-line-soft);
+	border-radius: var(--xz-r);
+	background: var(--xz-surface-2);
+}
+
+.xz-awd-cred__title {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+	margin: 0;
+	font-size: var(--xz-fs-base);
+	color: var(--xz-crimson);
+}
+
+/* ── 实时事件流 ───────────────────────────────────────────────────── */
+
+.xz-awd-feed__type {
+	font-family: var(--xz-font-mono);
+	font-size: var(--xz-fs-sm);
+	font-weight: 600;
+	color: var(--xz-crimson);
+	flex: 0 0 auto;
+}
+
+.xz-awd-feed__summary {
+	color: var(--xz-ink-2);
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* ── 响应式：移动端单列 + 卡片不写死宽度 ──────────────────────────── */
+
+@media (max-width: 1100px) {
+	.xz-awd .xz-split {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+/* `.xz-gbgrid` 的 `minmax(300px, …)` 在窄屏会溢出，这里在面板内放宽下限。 */
+.xz-awd .xz-gbgrid {
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+}
+
+@media (max-width: 560px) {
+	.xz-awd-status {
+		grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+	}
+
+	.xz-awd-cred {
+		padding: var(--xz-sp-3);
+	}
+}

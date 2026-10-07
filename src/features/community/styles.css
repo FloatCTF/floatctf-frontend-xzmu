@@ -1,0 +1,164 @@
+/* ============================================================================
+ * 社区功能域样式（前缀 `.xz-com-`）
+ *
+ * 只补充设计系统里没有的部分：公告卡片、评论楼中楼、计数条、类型徽标排布。
+ * 基础类（`.xz-post` / `.xz-comment` / `.xz-list` / `.xz-md` / `.xz-board`）复用
+ * `src/styles/domain.css`，此处不重复定义。
+ * ========================================================================= */
+
+/* ── 工具条提示 ───────────────────────────────────────────────────── */
+.xz-com-hint {
+	margin-left: auto;
+	color: var(--xz-ink-3);
+	font-size: var(--xz-fs-sm);
+	white-space: nowrap;
+}
+
+/* ── 公告卡片列表 ─────────────────────────────────────────────────── */
+.xz-com-posts {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-4);
+}
+
+.xz-com-post {
+	overflow: hidden;
+}
+
+.xz-com-title {
+	margin: 0;
+	font-family: var(--xz-font-serif);
+	font-size: var(--xz-fs-lg);
+	font-weight: 700;
+	line-height: 1.45;
+	color: var(--xz-ink);
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+	flex-wrap: wrap;
+}
+
+/* ── 行内元信息 ───────────────────────────────────────────────────── */
+.xz-com-counts {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--xz-sp-3);
+	flex: 0 0 auto;
+	color: var(--xz-ink-3);
+	font-size: var(--xz-fs-sm);
+	font-variant-numeric: tabular-nums;
+}
+
+.xz-com-counts > span {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.xz-com-user {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+	min-width: 0;
+}
+
+.xz-com-strong {
+	font-weight: 600;
+}
+
+.xz-com-score {
+	font-family: var(--xz-font-mono);
+	font-weight: 700;
+	color: var(--xz-ok);
+	white-space: nowrap;
+}
+
+.xz-com-score .xz-xs {
+	margin-left: 4px;
+	font-weight: 400;
+}
+
+.xz-com-desc {
+	margin-top: 4px;
+	color: var(--xz-ink-2);
+	font-size: var(--xz-fs-md);
+	line-height: 1.55;
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+}
+
+/* ── 评论 ─────────────────────────────────────────────────────────── */
+.xz-com-thread {
+	display: flex;
+	flex-direction: column;
+}
+
+.xz-com-thread > .xz-comment:first-child {
+	padding-top: 0;
+}
+
+.xz-com-commentbody .xz-md {
+	font-size: var(--xz-fs-md);
+}
+
+.xz-com-commentbody .xz-md p {
+	margin: 4px 0;
+}
+
+.xz-com-actions {
+	gap: var(--xz-sp-1);
+	flex-wrap: wrap;
+}
+
+.xz-com-actions .xz-muted {
+	margin-right: auto;
+}
+
+/* 楼中楼：缩进由内联 margin-left（深度 × 16px，最多 5 层）给出，这里只画层级线。 */
+.xz-com-nested {
+	border-left: 2px solid var(--xz-line-soft);
+	padding-left: var(--xz-sp-4);
+}
+
+.xz-com-replybox {
+	margin-top: var(--xz-sp-2);
+	padding: var(--xz-sp-3);
+	background: var(--xz-surface-2);
+	border: 1px solid var(--xz-line-soft);
+	border-radius: var(--xz-r);
+}
+
+.xz-com-you {
+	padding: 1px 7px;
+	border-radius: var(--xz-r-pill);
+	background: var(--xz-crimson-a08);
+	color: var(--xz-crimson);
+	font-size: var(--xz-fs-xs);
+}
+
+.xz-com-divider {
+	margin: var(--xz-sp-4) 0;
+	border: 0;
+	border-top: 1px solid var(--xz-line-soft);
+}
+
+/* ── 卡片与区块间距 ───────────────────────────────────────────────── */
+.xz-com-section {
+	margin-top: var(--xz-sp-5);
+}
+
+.xz-com-pager {
+	margin-top: var(--xz-sp-4);
+}
+
+/* ── 响应式 ───────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+	.xz-com-counts {
+		display: none;
+	}
+
+	.xz-com-hint {
+		margin-left: 0;
+		width: 100%;
+	}
+}

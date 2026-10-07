@@ -1,0 +1,402 @@
+/* ============================================================================
+ * AWDP 演练（赛事）与练习 Run 工作台 —— 局部样式
+ *
+ * 前缀 `.xz-awdp-`（唯一，避免与 domain.css 的共享类冲突）。
+ * 只使用设计令牌变量，不写死颜色；共享类（.xz-board / .xz-gb / .xz-gbgrid /
+ * .xz-phase / .xz-flagbar / .xz-trend / .xz-kv）保持不动，这里只补它们缺的形态。
+ * ========================================================================= */
+
+.xz-awdp-stack {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-4);
+}
+
+.xz-awdp-head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: var(--xz-sp-4);
+	margin-bottom: var(--xz-sp-4);
+}
+
+.xz-awdp-head__main {
+	flex: 1 1 320px;
+	min-width: 0;
+}
+
+.xz-awdp-head__aside {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--xz-sp-3);
+}
+
+.xz-awdp-phasebar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--xz-sp-3);
+}
+
+/* 相位徽标的语气色 —— 特别是 `preparing_fix`（Default 漏掉的过渡态）必须
+ * 与 `pending` 区分开：它用 warn 语气。 */
+.xz-awdp-phase[data-tone="warn"] {
+	background: var(--xz-warn-bg);
+	color: var(--xz-warn);
+	border-color: rgba(200, 134, 13, 0.32);
+}
+
+.xz-awdp-phase[data-tone="info"] {
+	background: var(--xz-info-bg);
+	color: var(--xz-info);
+	border-color: rgba(13, 85, 153, 0.28);
+}
+
+.xz-awdp-phase[data-tone="neutral"] {
+	background: var(--xz-paper-3);
+	color: var(--xz-ink-3);
+	border-color: var(--xz-line);
+}
+
+.xz-awdp-phase[data-tone="danger"] {
+	background: var(--xz-danger-bg);
+	color: var(--xz-danger);
+	border-color: rgba(218, 62, 55, 0.3);
+}
+
+.xz-awdp-phasebar__clock {
+	font-family: var(--xz-font-mono);
+	font-size: var(--xz-fs-xl);
+	font-weight: 700;
+	color: var(--xz-crimson);
+	font-variant-numeric: tabular-nums;
+}
+
+.xz-awdp-phasebar__clock[data-urgent="true"] {
+	color: var(--xz-danger);
+}
+
+/* 阶段说明条：与 Banner 同语义，但更贴卡片，用于「本阶段能做什么」。 */
+.xz-awdp-notice {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--xz-sp-3);
+	padding: var(--xz-sp-3) var(--xz-sp-4);
+	border-radius: var(--xz-r);
+	border: 1px solid var(--xz-crimson-a14);
+	background: var(--xz-crimson-a08);
+	font-size: var(--xz-fs-md);
+	color: var(--xz-ink-2);
+}
+
+.xz-awdp-notice[data-tone="danger"] {
+	border-color: rgba(218, 62, 55, 0.3);
+	background: var(--xz-danger-bg);
+}
+
+.xz-awdp-notice[data-tone="warn"] {
+	border-color: rgba(200, 134, 13, 0.32);
+	background: var(--xz-warn-bg);
+}
+
+.xz-awdp-notice[data-tone="ok"] {
+	border-color: rgba(34, 139, 34, 0.3);
+	background: var(--xz-ok-bg);
+}
+
+.xz-awdp-notice[data-tone="info"] {
+	border-color: rgba(13, 85, 153, 0.24);
+	background: var(--xz-info-bg);
+}
+
+.xz-awdp-notice__title {
+	font-weight: 700;
+	color: var(--xz-ink);
+	margin-bottom: 2px;
+}
+
+/* 阶段时序 / 配置的数字栅格 */
+.xz-awdp-timing {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(146px, 1fr));
+	gap: var(--xz-sp-3);
+}
+
+/* 实例对外端点 */
+.xz-awdp-endpoints {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.xz-awdp-endpoint {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 2px 8px;
+	border-radius: var(--xz-r-sm);
+	border: 1px solid var(--xz-line);
+	background: var(--xz-surface-2);
+	font-family: var(--xz-font-mono);
+	font-size: var(--xz-fs-sm);
+	color: var(--xz-ink-2);
+	word-break: break-all;
+}
+
+.xz-awdp-endpoint[data-proto="http"] {
+	border-color: var(--xz-crimson-a24);
+	color: var(--xz-crimson);
+}
+
+/* 补丁文件选择：可见的文件名 / 大小 */
+.xz-awdp-file {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--xz-sp-2);
+	font-size: var(--xz-fs-md);
+}
+
+.xz-awdp-file input[type="file"] {
+	flex: 1 1 200px;
+	min-width: 0;
+	font-size: var(--xz-fs-sm);
+	color: var(--xz-ink-2);
+	background: var(--xz-surface-2);
+	border: 1px dashed var(--xz-line-strong);
+	border-radius: var(--xz-r-sm);
+	padding: 5px 8px;
+	cursor: pointer;
+}
+
+.xz-awdp-file input[type="file"]::file-selector-button {
+	margin-right: 8px;
+	padding: 3px 10px;
+	border: 1px solid var(--xz-crimson-a24);
+	border-radius: var(--xz-r-sm);
+	background: var(--xz-surface);
+	color: var(--xz-crimson);
+	font: inherit;
+	cursor: pointer;
+}
+
+.xz-awdp-file__name {
+	font-family: var(--xz-font-mono);
+	color: var(--xz-ink);
+	word-break: break-all;
+}
+
+.xz-awdp-file__size {
+	font-family: var(--xz-font-mono);
+	color: var(--xz-ink-3);
+	white-space: nowrap;
+}
+
+/* 操作结果（Break / Patch / Test Check 的持久回执） */
+.xz-awdp-result {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	padding: var(--xz-sp-3);
+	border-radius: var(--xz-r-sm);
+	border: 1px solid var(--xz-line);
+	background: var(--xz-surface-2);
+	font-size: var(--xz-fs-md);
+}
+
+.xz-awdp-result[data-tone="ok"] {
+	border-color: rgba(34, 139, 34, 0.32);
+	background: var(--xz-ok-bg);
+}
+
+.xz-awdp-result[data-tone="warn"] {
+	border-color: rgba(200, 134, 13, 0.32);
+	background: var(--xz-warn-bg);
+}
+
+.xz-awdp-result[data-tone="danger"] {
+	border-color: rgba(218, 62, 55, 0.32);
+	background: var(--xz-danger-bg);
+}
+
+.xz-awdp-result__head {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-weight: 600;
+	color: var(--xz-ink);
+}
+
+.xz-awdp-result__row {
+	display: flex;
+	align-items: baseline;
+	gap: var(--xz-sp-2);
+}
+
+.xz-awdp-result__k {
+	color: var(--xz-ink-3);
+	min-width: 74px;
+	flex: 0 0 auto;
+}
+
+.xz-awdp-result__v {
+	font-family: var(--xz-font-mono);
+	color: var(--xz-ink-2);
+	word-break: break-word;
+	white-space: pre-wrap;
+}
+
+.xz-awdp-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--xz-sp-2);
+	margin-top: auto;
+}
+
+/* 积分榜矩阵：每格是「破题 / Fix 分 / 逐轮状态」的紧凑堆叠 */
+.xz-awdp-matrixscroll {
+	overflow-x: auto;
+}
+
+.xz-awdp-matrixscroll .xz-board th,
+.xz-awdp-matrixscroll .xz-board td {
+	white-space: nowrap;
+}
+
+.xz-awdp-gbcol {
+	display: block;
+	font-weight: 400;
+	font-size: var(--xz-fs-xs);
+	color: var(--xz-ink-3);
+}
+
+.xz-awdp-cells {
+	display: flex;
+	align-items: center;
+	gap: 3px;
+}
+
+.xz-awdp-cell {
+	display: inline-grid;
+	place-items: center;
+	min-width: 20px;
+	height: 20px;
+	padding: 0 4px;
+	border-radius: var(--xz-r-sm);
+	border: 1px solid var(--xz-line);
+	background: var(--xz-paper-3);
+	font-family: var(--xz-font-mono);
+	font-size: var(--xz-fs-xs);
+	color: var(--xz-ink-3);
+	cursor: help;
+}
+
+.xz-awdp-cell[data-status="ok"] {
+	border-color: rgba(34, 139, 34, 0.4);
+	background: var(--xz-ok-bg);
+	color: var(--xz-ok);
+}
+
+.xz-awdp-cell[data-status="danger"] {
+	border-color: rgba(218, 62, 55, 0.4);
+	background: var(--xz-danger-bg);
+	color: var(--xz-danger);
+}
+
+.xz-awdp-cell[data-status="warn"] {
+	border-color: rgba(200, 134, 13, 0.4);
+	background: var(--xz-warn-bg);
+	color: var(--xz-warn);
+}
+
+.xz-awdp-cell[data-status="info"] {
+	border-color: rgba(13, 85, 153, 0.3);
+	background: var(--xz-info-bg);
+	color: var(--xz-info);
+}
+
+.xz-awdp-cell[data-status="gold"] {
+	border-color: var(--xz-gold-a30);
+	background: var(--xz-gold-a16);
+	color: var(--xz-gold-lo);
+}
+
+/* 趋势：每个主体一行迷你柱状图（复用 .xz-trend 的柱体样式） */
+.xz-awdp-trend-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-3);
+}
+
+.xz-awdp-trend-row {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.xz-awdp-trend-name {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: var(--xz-sp-3);
+	font-size: var(--xz-fs-md);
+	font-weight: 600;
+}
+
+.xz-awdp-trend-name[data-me="true"] {
+	color: var(--xz-crimson);
+}
+
+.xz-awdp-trend-row .xz-trend {
+	height: 86px;
+}
+
+.xz-awdp-legend {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--xz-sp-3);
+	font-size: var(--xz-fs-sm);
+	color: var(--xz-ink-3);
+}
+
+/* 内联小工具条（卡片头右侧的按钮组） */
+.xz-awdp-toolbar {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+	flex-wrap: wrap;
+}
+
+.xz-awdp-inline {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+	font-size: var(--xz-fs-md);
+	color: var(--xz-ink-2);
+}
+
+.xz-awdp-note {
+	font-size: var(--xz-fs-sm);
+	color: var(--xz-ink-3);
+	line-height: 1.55;
+}
+
+/* 计分流水里的正负分值 */
+.xz-awdp-delta {
+	font-family: var(--xz-font-mono);
+}
+
+.xz-awdp-delta[data-sign="plus"] {
+	color: var(--xz-ok);
+}
+
+.xz-awdp-delta[data-sign="minus"] {
+	color: var(--xz-danger);
+}
+
+@media (max-width: 900px) {
+	.xz-awdp-head__aside {
+		width: 100%;
+	}
+}

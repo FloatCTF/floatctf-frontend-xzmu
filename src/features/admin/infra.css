@@ -1,0 +1,251 @@
+/* ============================================================================
+ * 管理控制台 · 基础设施功能域（/admin/docker、/admin/database、/admin/terminal）
+ *
+ * 类名前缀统一为 `.xz-inf-`，避免与其它功能域（`.xz-awd-*`、`.xz-admin-*` 等）冲突。
+ * 只使用设计令牌（`src/styles/tokens.css`），**不写任何内联 hex**。
+ * 通用形态（卡片 / 表格 / 徽标 / 对话框 / 三态）一律复用 `src/styles/` 既有类，
+ * 这里只补该域特有的少量结构。
+ * ========================================================================= */
+
+/* ── 视图切换（容器 / 镜像 / 网络）────────────────────────────────── */
+.xz-inf-switch {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-3);
+	flex-wrap: wrap;
+	margin-bottom: var(--xz-sp-5);
+}
+
+.xz-inf-switch__hint {
+	color: var(--xz-ink-3);
+	font-size: var(--xz-fs-sm);
+	margin-left: auto;
+}
+
+/* ── 卡片内筛选栏（CardBody --flush 下需要自带上边距）─────────────── */
+.xz-inf-filters {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+	flex-wrap: wrap;
+	padding: var(--xz-sp-4) var(--xz-sp-5) 0;
+}
+
+.xz-inf-filters .xz-input {
+	width: auto;
+	min-width: 240px;
+}
+
+.xz-inf-filters__note {
+	margin-left: auto;
+	color: var(--xz-ink-3);
+	font-size: var(--xz-fs-xs);
+}
+
+/* ── Docker 对象标识 / 端口列 ─────────────────────────────────────── */
+.xz-inf-id {
+	font-family: var(--xz-font-mono);
+	font-size: var(--xz-fs-sm);
+	color: var(--xz-ink-2);
+	word-break: break-all;
+}
+
+.xz-inf-ports {
+	font-family: var(--xz-font-mono);
+	font-size: var(--xz-fs-sm);
+	color: var(--xz-ink-2);
+	white-space: pre-wrap;
+	word-break: break-word;
+	max-width: 34ch;
+}
+
+.xz-inf-name {
+	font-weight: 600;
+	word-break: break-all;
+}
+
+.xz-inf-create {
+	margin-bottom: var(--xz-sp-5);
+}
+
+/* ── SQL 控制台 ───────────────────────────────────────────────────── */
+.xz-inf-sql {
+	display: grid;
+	grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+	gap: var(--xz-sp-4);
+	align-items: start;
+}
+
+@media (max-width: 1100px) {
+	.xz-inf-sql {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+.xz-inf-sql__editor {
+	font-family: var(--xz-font-mono);
+	font-size: var(--xz-fs-md);
+	line-height: 1.65;
+	min-height: 260px;
+	resize: vertical;
+}
+
+.xz-inf-sql__snippets {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--xz-sp-2);
+	margin-top: var(--xz-sp-3);
+}
+
+.xz-inf-sql__run {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-3);
+	flex-wrap: wrap;
+	margin-top: var(--xz-sp-4);
+}
+
+.xz-inf-sql__plan {
+	margin-top: var(--xz-sp-3);
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-2);
+}
+
+.xz-inf-stmt {
+	border: 1px solid var(--xz-line-soft);
+	border-left: 3px solid var(--xz-crimson);
+	border-radius: var(--xz-r-sm);
+	background: var(--xz-surface-2);
+	padding: var(--xz-sp-3);
+}
+
+.xz-inf-stmt[data-tone="danger"] {
+	border-left-color: var(--xz-danger);
+	background: var(--xz-danger-bg);
+}
+
+.xz-inf-stmt[data-tone="ok"] {
+	border-left-color: var(--xz-ok);
+}
+
+.xz-inf-stmt[data-tone="error"] {
+	border-left-color: var(--xz-danger);
+}
+
+.xz-inf-stmt__head {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+	flex-wrap: wrap;
+	margin-bottom: 6px;
+}
+
+.xz-inf-stmt__sql {
+	margin: 0;
+	font-family: var(--xz-font-mono);
+	font-size: var(--xz-fs-sm);
+	color: var(--xz-ink-2);
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.xz-inf-result {
+	margin-top: var(--xz-sp-3);
+}
+
+.xz-inf-result__meta {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+	flex-wrap: wrap;
+	margin-bottom: var(--xz-sp-2);
+	color: var(--xz-ink-2);
+	font-size: var(--xz-fs-sm);
+}
+
+.xz-inf-cell {
+	font-family: var(--xz-font-mono);
+	font-size: var(--xz-fs-sm);
+	max-width: 40ch;
+	overflow-wrap: anywhere;
+}
+
+.xz-inf-cell[data-null="true"] {
+	color: var(--xz-ink-4);
+	font-style: italic;
+}
+
+.xz-inf-log {
+	display: flex;
+	flex-direction: column;
+	gap: var(--xz-sp-3);
+}
+
+/* ── Web 终端 ─────────────────────────────────────────────────────── */
+.xz-inf-term {
+	margin-top: var(--xz-sp-4);
+}
+
+/* `.xz-term` 默认 `overflow: hidden`（为 xterm 预留），
+ * 这里的 <pre> 版本需要能滚动回看历史输出。 */
+.xz-inf-term .xz-term {
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.xz-inf-term__bar {
+	display: flex;
+	align-items: center;
+	gap: var(--xz-sp-2);
+	flex-wrap: wrap;
+	margin-bottom: var(--xz-sp-3);
+}
+
+.xz-inf-term__url {
+	font-family: var(--xz-font-mono);
+	font-size: var(--xz-fs-sm);
+	color: var(--xz-ink-2);
+	word-break: break-all;
+}
+
+.xz-inf-term__screen {
+	flex: 1 1 auto;
+	margin: 0;
+	min-height: 0;
+	overflow: visible;
+	outline: none;
+	cursor: text;
+	color: var(--xz-gold-hi);
+	background: transparent;
+	font-family: var(--xz-font-mono);
+	font-size: var(--xz-fs-md);
+	line-height: 1.45;
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+	tab-size: 4;
+}
+
+.xz-inf-term__screen:focus-visible {
+	box-shadow: inset 0 0 0 2px var(--xz-gold-a30);
+}
+
+.xz-inf-term__placeholder {
+	margin: 0;
+	color: var(--xz-gold);
+	font-family: var(--xz-font-mono);
+	font-size: var(--xz-fs-md);
+	white-space: pre-wrap;
+}
+
+.xz-inf-term__notes {
+	margin: var(--xz-sp-4) 0 0;
+	padding-left: 1.2em;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	color: var(--xz-ink-2);
+	font-size: var(--xz-fs-md);
+	line-height: 1.7;
+}
