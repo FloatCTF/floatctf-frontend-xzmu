@@ -140,7 +140,10 @@ export function CommandPalette({
 
 /** 由导航配置生成「跳转」类命令。 */
 export function useNavigationCommands(
-	groups: { label: string; items: { to: string; label: string; icon: string }[] }[],
+	groups: {
+		label: string;
+		items: { to: string; label: string; icon: string; reloadDocument?: boolean }[];
+	}[],
 	onNavigate: (to: string) => void,
 ): Command[] {
 	const navigate = useNavigate();
@@ -155,6 +158,12 @@ export function useNavigationCommands(
 					hint: item.to,
 					run: () => {
 						onNavigate(item.to);
+						// 同源静态站点（如 `/training/` 教学课程站）不在本前端路由表内，
+						// 走自研路由会落到 not-found，必须整页跳转。
+						if (item.reloadDocument) {
+							window.location.assign(item.to);
+							return;
+						}
 						navigate(item.to);
 					},
 				})),

@@ -18,6 +18,13 @@ export interface NavItem {
 	exact?: boolean;
 	/** 前缀匹配时用于判断当前项（默认用 `to`）。 */
 	matchPrefix?: string;
+	/**
+	 * 整页加载（真实 `<a href>` 跳转），不经过自研路由。
+	 *
+	 * 用于**同源但不属于本前端路由表**的静态站点（平台在 `/training/` 挂载的教学课程站）：
+	 * 走客户端路由会落到 not-found，必须强制文档级跳转。
+	 */
+	reloadDocument?: boolean;
 }
 
 export interface NavGroup {
@@ -33,6 +40,8 @@ export const PLAYER_NAV: NavGroup[] = [
 			{ to: "/events", label: "赛事", icon: "flag" },
 			{ to: "/challenges", label: "题库", icon: "puzzle" },
 			{ to: "/sets", label: "题集", icon: "layers" },
+			// 平台在 `/training/` 直接提供的教学课程站（同源静态站点，不属于本前端路由，故整页加载）。
+			{ to: "/training/", label: "课程", icon: "cap", reloadDocument: true },
 			{ to: "/instances", label: "我的实例", icon: "box" },
 			{ to: "/training", label: "AWDP 训练", icon: "target" },
 		],

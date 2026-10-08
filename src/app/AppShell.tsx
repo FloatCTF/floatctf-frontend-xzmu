@@ -22,6 +22,7 @@ import {
 	PLAYER_MOBILE_NAV,
 	PLAYER_NAV,
 	type NavGroup,
+	type NavItem,
 } from "./nav.ts";
 import { CommandPalette, useNavigationCommands } from "./CommandPalette.tsx";
 import type { LiveStripState } from "./live.tsx";
@@ -33,29 +34,58 @@ function isActive(pathname: string, to: string, exact?: boolean): boolean {
 	return pathname === to || pathname.startsWith(`${to}/`);
 }
 
+/**
+ * 导航项链接：普通条目走自研路由；`reloadDocument` 条目渲染真实 `<a href>` 整页加载
+ * —— 它指向同源但**不属于本前端路由表**的静态站点（平台在 `/training/` 挂载的教学课程站），
+ * 交给自研路由会落到 not-found。
+ */
+function NavItemLink({
+	item,
+	className,
+	title,
+	current,
+	children,
+}: {
+	item: NavItem;
+	className: string;
+	title?: string;
+	current?: boolean;
+	children: ReactNode;
+}) {
+	if (item.reloadDocument) {
+		return (
+			<a href={item.to} className={className} title={title}>
+				{children}
+			</a>
+		);
+	}
+	return (
+		<Link to={item.to} className={className} title={title} aria-current={current ? "page" : undefined}>
+			{children}
+		</Link>
+	);
+}
+
 function NavGroups({ groups, pathname }: { groups: NavGroup[]; pathname: string }) {
 	return (
 		<>
 			{groups.map((group) => (
 				<div key={group.label}>
 					<div className="xz-rail__group">{group.label}</div>
-					{group.items.map((item) => {
-						const active = isActive(pathname, item.to, item.exact);
-						return (
-							<Link
-								key={item.to}
-								to={item.to}
-								className="xz-rail__item"
-								title={item.label}
-								aria-current={active ? "page" : undefined}
-							>
-								<span className="xz-rail__icon">
-									<Icon name={item.icon} size={17} />
-								</span>
-								<span className="xz-rail__label">{item.label}</span>
-							</Link>
-						);
-					})}
+					{group.items.map((item) => (
+						<NavItemLink
+							key={item.to}
+							item={item}
+							className="xz-rail__item"
+							title={item.label}
+							current={isActive(pathname, item.to, item.exact)}
+						>
+							<span className="xz-rail__icon">
+								<Icon name={item.icon} size={17} />
+							</span>
+							<span className="xz-rail__label">{item.label}</span>
+						</NavItemLink>
+					))}
 				</div>
 			))}
 		</>
@@ -353,20 +383,17 @@ export function AppShell({
 				</main>
 
 				<nav className="xz-bottomnav" aria-label="快捷导航">
-					{mobileItems.map((item) => {
-						const active = isActive(url.pathname, item.to, item.exact);
-						return (
-							<Link
-								key={item.to}
-								to={item.to}
-								className="xz-bottomnav__item"
-								aria-current={active ? "page" : undefined}
-							>
-								<Icon name={item.icon} size={19} />
-								<span>{item.label}</span>
-							</Link>
-						);
-					})}
+					{mobileItems.map((item) => (
+						<NavItemLink
+							key={item.to}
+							item={item}
+							className="xz-bottomnav__item"
+							current={isActive(url.pathname, item.to, item.exact)}
+						>
+							<Icon name={item.icon} size={19} />
+							<span>{item.label}</span>
+						</NavItemLink>
+					))}
 				</nav>
 			</div>
 
