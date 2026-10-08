@@ -126,7 +126,6 @@ scripts/frontend.sh verify  → 制品校验通过：xzmu@0.1.0      ✅
 | `admin-console-overview.png` | 控制台总览（真实统计 + 两个真实赛事 + 最近注册） |
 | `admin-events.png` | 赛事管理 |
 | `admin-settings.png` | 动态设置 |
-| `admin-docker.png` | 容器运维 |
 | `admin-network.png` | 靶场网络 |
 | `admin-frontends-bootstrap-path.png` | 前端管理（引导链路径，列出 default + xzmu） |
 | `breakglass-default-frontend.png` | `?frontend=default` 破窗后的 Default Frontend |

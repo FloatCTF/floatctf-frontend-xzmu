@@ -121,9 +121,9 @@ sudo $FLOATCTF_HOME/frontend.sh info xzmu
 | :--------: | :--: | :------: |
 | ![GameBox 库](./docs/images/admin-gameboxes.png) | ![用户](./docs/images/admin-users.png) | ![靶场网络](./docs/images/admin-network.png) |
 
-| 动态设置 | 容器运维 | Web 终端 |
-| :------: | :------: | :------: |
-| ![动态设置](./docs/images/admin-settings.png) | ![容器运维](./docs/images/admin-docker.png) | ![Web 终端](./docs/images/admin-terminal.png) |
+| 动态设置 | SQL 控制台 | Web 终端 |
+| :------: | :--------: | :------: |
+| ![动态设置](./docs/images/admin-settings.png) | ![SQL 控制台](./docs/images/admin-database.png) | ![Web 终端](./docs/images/admin-terminal.png) |
 
 | 操作日志 | 计划任务 | 前端管理 |
 | :------: | :------: | :------: |
