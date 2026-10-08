@@ -5,7 +5,7 @@
 [CAPABILITY-MATRIX](../../docs/frontend/CAPABILITY-MATRIX.md) 中**全部 89 项 `required` 能力**
 （选手端 + 管理端），即 **complete** 范围。
 
-- **主题**：`民大红 · 鎏金`，配色取自学校两个真实站点（见 §3）。
+- **主题**：`民大红 · 鎏金`，配色取自学校两个真实站点（见 §4）。
 - **技术栈**：React 19 + TypeScript 5 + Vite 6 + TanStack Query v5 + 自研 History 路由 + 自研 CSS 设计系统。
 - **零组件库**：不使用 Primer / Tailwind / Ant Design；全部 UI 组件在 `src/ui/`。
 - **交互模型**：双工作区（训练场 / 控制台）+ 赛事驾驶舱 + 命令面板 + 上下文抽屉。
@@ -80,7 +80,59 @@ sudo $FLOATCTF_HOME/frontend.sh info xzmu
 > （`scripts/package-sdk-dist.sh`）并把依赖改成 `file:` 指向这些 tarball。
 > 在 monorepo 内（本仓库当前形态）直接构建即可；上面的**制品安装**路径完全不依赖源码与网络。
 
-## 3. 视觉方向：「民大红 · 鎏金」
+## 3. 界面截图
+
+全部截图都在**真实 API + 全新数据库**下采集（详见 [docs/E2E-ACCEPTANCE.md](./docs/E2E-ACCEPTANCE.md)），
+原图存于 [`docs/images/`](./docs/images/)。
+
+### 登录
+
+![登录页](./docs/images/login.png)
+
+### 选手端
+
+| 总览 | 赛事 | 题库 |
+| :--: | :--: | :--: |
+| ![总览](./docs/images/dashboard.png) | ![赛事](./docs/images/events.png) | ![题库](./docs/images/challenges.png) |
+
+| 题集 | 我的实例 | AWDP 训练 |
+| :--: | :------: | :-------: |
+| ![题集](./docs/images/challenge-sets.png) | ![我的实例](./docs/images/instances.png) | ![AWDP 训练](./docs/images/training.png) |
+
+| 公告 | 讨论区 | 解题流水 |
+| :--: | :----: | :------: |
+| ![公告](./docs/images/announcements.png) | ![讨论区](./docs/images/discussions.png) | ![解题流水](./docs/images/solves.png) |
+
+| 排行榜 | 题解 | 武器库 |
+| :----: | :--: | :----: |
+| ![排行榜](./docs/images/top.png) | ![题解](./docs/images/writeups.png) | ![武器库](./docs/images/weapons.png) |
+
+| 我的资料 |
+| :------: |
+| ![我的资料](./docs/images/profile.png) |
+
+### 管理端（控制台）
+
+| 控制台总览 | 赛事管理 | 题库管理 |
+| :--------: | :------: | :------: |
+| ![控制台总览](./docs/images/admin-dashboard.png) | ![赛事管理](./docs/images/admin-events.png) | ![题库管理](./docs/images/admin-challenges.png) |
+
+| GameBox 库 | 用户 | 靶场网络 |
+| :--------: | :--: | :------: |
+| ![GameBox 库](./docs/images/admin-gameboxes.png) | ![用户](./docs/images/admin-users.png) | ![靶场网络](./docs/images/admin-network.png) |
+
+| 动态设置 | 容器运维 | Web 终端 |
+| :------: | :------: | :------: |
+| ![动态设置](./docs/images/admin-settings.png) | ![容器运维](./docs/images/admin-docker.png) | ![Web 终端](./docs/images/admin-terminal.png) |
+
+| 操作日志 | 计划任务 | 前端管理 |
+| :------: | :------: | :------: |
+| ![操作日志](./docs/images/admin-logs.png) | ![计划任务](./docs/images/admin-scheduled-tasks.png) | ![前端管理](./docs/images/admin-frontends.png) |
+
+> 「前端管理」一图是走**生产引导链**采集的：注册表里同时列出 `default`（受保护）与本前端
+> `xzmu`（生效中），并可直接切换。
+
+## 4. 视觉方向：「民大红 · 鎏金」
 
 配色不是拍脑袋定的，全部来自对两个真实站点的实测（截图存于 `docs/design-ref/`）：
 
@@ -99,7 +151,7 @@ sudo $FLOATCTF_HOME/frontend.sh info xzmu
 全部走系统字体，**不下载 web font**（离线可用）。
 深色模式通过 `prefers-color-scheme` 只替换表面与文字令牌，主色与鎏金保持不变。
 
-## 4. 交互模型（与 Default 不同，这是有意的）
+## 5. 交互模型（与 Default 不同，这是有意的）
 
 - **两个工作区**：选手「训练场」与管理「控制台」在顶栏一键切换，导航层级互不复用。
 - **赛事驾驶舱**：Default 把 AWD / AWDP 拆成一堆页面（overview / gameboxes / scoreboard /
@@ -115,7 +167,7 @@ sudo $FLOATCTF_HOME/frontend.sh info xzmu
 - **实时状态条**：顶栏常驻显示 SSE 连接状态（`connected` / `reconnecting` / `auth_error` / …）。
   `auth_error` 有独立横幅 —— SSE 的 401 不会触发全局 `onUnauthorized`（SDK 语义）。
 
-## 5. 目录结构
+## 6. 目录结构
 
 ```
 src/
@@ -131,7 +183,7 @@ src/
 └── styles/                    # tokens → base → layout → components → domain
 ```
 
-## 6. 文档
+## 7. 文档
 
 | 文档 | 内容 |
 |---|---|
@@ -141,6 +193,6 @@ src/
 | [docs/SDK-API-REFERENCE.md](./docs/SDK-API-REFERENCE.md) | 240 个 SDK 方法签名 + 147 个 DTO 字段 + 57 条陷阱 |
 | [docs/CAPABILITY-BEHAVIOR-MAP.md](./docs/CAPABILITY-BEHAVIOR-MAP.md) | 89 项能力的行为语义（含后端证据行号） |
 
-## 7. 许可
+## 8. 许可
 
 AGPL-3.0-only（与 FloatCTF 平台一致）。
