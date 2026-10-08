@@ -82,6 +82,7 @@ const PATHS: Record<string, string> = {
 	list: "M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01",
 	grid: "M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z",
 	book: "M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2V5Zm3 0h9v14H7",
+	cap: "M12 4 2 9l10 5 10-5-10-5Zm-6 7.5V16c0 1.7 3 3 6 3s6-1.3 6-3v-4.5",
 	bulb: "M9 18h6m-5 3h4M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3Z",
 	beaker: "M9 3h6M10 3v6L5 19a1 1 0 0 0 .9 1.5h12.2A1 1 0 0 0 19 19l-5-10V3M7 14h10",
 	archive: "M3 6h18v4H3V6Zm2 4h14v10H5V10Zm4 4h6",
