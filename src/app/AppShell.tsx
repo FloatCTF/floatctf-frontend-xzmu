@@ -9,6 +9,7 @@
 
 import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 
+import { useRuntime } from "../api/client.ts";
 import { Link } from "../router/Link.tsx";
 import { useLocation, useNavigate } from "../router/router.tsx";
 import { Avatar, IconButton } from "../ui/primitives.tsx";
@@ -216,6 +217,7 @@ export function AppShell({
 	onLogout: () => void;
 	footer?: ReactNode;
 }) {
+	const runtime = useRuntime();
 	const { url } = useLocation();
 	const navigate = useNavigate();
 	const confirm = useConfirm();
@@ -363,7 +365,7 @@ export function AppShell({
 						{footer ?? (
 							<>
 								<div>西藏民族大学 CTF 平台</div>
-								<div>前端 xzmu · v0.1.0</div>
+								<div>前端 xzmu · v{runtime.context.frontendVersion}</div>
 							</>
 						)}
 					</div>

@@ -18,7 +18,7 @@ if (root) {
 		apiBaseUrl: DEFAULT_API_BASE_URL,
 		assetBaseUrl: "/",
 		frontendId: "xzmu",
-		frontendVersion: "0.1.0",
+		frontendVersion: "dev",
 		platformVersion: "dev",
 		apiContractVersion: "1",
 		frontendRuntimeVersion: "1",
