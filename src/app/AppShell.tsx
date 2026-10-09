@@ -417,7 +417,6 @@ export function AppShell({
 						run: () => {
 							void confirm({
 								title: "退出登录？",
-								description: "将清除本地的登录凭证。",
 								tone: "danger",
 								confirmText: "退出",
 							}).then((ok) => {

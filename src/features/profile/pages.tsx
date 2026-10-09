@@ -170,7 +170,7 @@ function ProfileForm({
 			<Field
 				label="新密码"
 				error={touched ? passwordError : undefined}
-				hint="留空表示不修改密码；如修改则至少 8 位。修改后当前登录仍有效（JWT 无状态，不会被强制下线）。"
+				hint="留空表示不修改密码；如修改则至少 8 位，且不会被强制下线。"
 			>
 				{(props) => (
 					<TextInput
@@ -265,8 +265,6 @@ export function MePage() {
 	const logout = () => {
 		void confirm({
 			title: "退出登录？",
-			description: "将清除本机保存的登录凭证。",
-			consequences: "退出后需要重新输入用户名与密码；未保存的表单内容不会保留。",
 			tone: "danger",
 			confirmText: "退出登录",
 		}).then((ok) => {
@@ -368,9 +366,6 @@ export function MePage() {
 									<Icon name="logout" size={16} />
 									退出登录
 								</div>
-								<p className="xz-muted" style={{ marginTop: 0 }}>
-									本机保存的登录凭证会被清除；服务端会话（JWT）本身无状态，无法在服务端注销。
-								</p>
 								<Button variant="danger" icon="logout" onClick={logout}>
 									退出登录
 								</Button>
