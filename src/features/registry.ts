@@ -10,6 +10,7 @@ import { adminCorePages } from "./admin/routes-core.tsx";
 import { adminEventPages } from "./admin/routes-events.tsx";
 import { adminInfraPages } from "./admin/routes-infra.tsx";
 import { authPages } from "./auth/routes.tsx";
+import { awdPages } from "./awd/routes.tsx";
 import { communityPages } from "./community/routes.tsx";
 import { dashboardPages } from "./dashboard/routes.tsx";
 import { eventPages } from "./events/routes.tsx";
@@ -24,6 +25,7 @@ export const FEATURE_PAGES: PageDef[] = [
 	// 选手工作区
 	...dashboardPages,
 	...eventPages,
+	...awdPages,
 	...jeopardyPages,
 	...trainingPages,
 	...communityPages,

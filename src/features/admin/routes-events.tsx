@@ -11,6 +11,7 @@
 import "./events.css";
 
 import type { PageDef } from "../../router/pages.ts";
+import { AwdBigScreenAdmin } from "../awd/screen.tsx";
 import { AdminChallengeSetDetailPage, AdminChallengeSetsPage } from "./events/ChallengeSetsPage.tsx";
 import { AdminChallengesPage } from "./events/ChallengesPage.tsx";
 import { AdminEventConsolePage } from "./events/EventConsole.tsx";
@@ -24,6 +25,14 @@ export const adminEventPages: PageDef[] = [
 		auth: "admin",
 		title: "赛事管理",
 		render: () => <AdminEventListPage />,
+	},
+	{
+		// 参数路径中更具体的必须排在前面（大屏先于赛事控制台）。
+		path: "/admin/events/:id/awd/screen",
+		auth: "admin",
+		title: "AWD 数据大屏",
+		wide: true,
+		render: (props) => <AwdBigScreenAdmin eventId={props.params.id} />,
 	},
 	{
 		path: "/admin/events/:id",

@@ -74,6 +74,10 @@ export function AwdArenaPanel({ eventId, mode }: EventPanelProps) {
 				</Banner>
 			) : null}
 			<AwdStreamNotice realtime={realtime} />
+			{/* 数据大屏：只读 kiosk 视图，投屏时用新窗口打开（不影响本页实时链路）。 */}
+			<a className="xz-awd-screen-entry" href={`/events/${eventId}/awd/screen`} target="_blank" rel="noreferrer">
+				AWD 数据大屏（投屏用，新窗口打开）
+			</a>
 			{/* 后端：status 需要**队伍成员关系**（403「你不是本赛事的参赛者」），
 			    赛事未配置 AWD 时 404。这里把平台错误翻译成可执行的下一步。 */}
 			{statusQuery.isError && (httpStatusOf(statusQuery.error) === 403 || httpStatusOf(statusQuery.error) === 404) ? (

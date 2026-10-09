@@ -1,6 +1,6 @@
 {
 	"name": "@floatctf/frontend-xzmu",
-	"version": "0.1.3",
+	"version": "0.1.4",
 	"private": true,
 	"type": "module",
 	"description": "西藏民族大学主题的 FloatCTF 可插拔前端（完整替换）",

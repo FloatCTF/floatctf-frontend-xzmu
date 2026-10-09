@@ -19,6 +19,7 @@ export const qk = {
 		all: ["events"] as const,
 		list: (params?: QueryParams) => ["events", "list", params ?? {}] as const,
 		detail: (id: string) => ["events", "detail", id] as const,
+		adminDetail: (id: string) => ["events", "admin", "detail", id] as const,
 		challenges: (id: string, params?: QueryParams) => ["events", "challenges", id, params ?? {}] as const,
 		instances: (id: string) => ["events", "instances", id] as const,
 		scoreboard: (id: string) => ["events", "scoreboard", id] as const,
