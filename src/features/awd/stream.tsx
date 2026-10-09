@@ -70,6 +70,8 @@ export interface AwdFeedEntry {
 	key: string;
 	type: string;
 	kind: "attack" | "defense" | "round" | undefined;
+	/** 平台原始 payload（展示层用 `describeAwdEvent` 翻成战报，认不出时回落到 `summary`）。 */
+	payload: unknown;
 	summary: string;
 	occurredAt: string | null;
 }
@@ -138,6 +140,7 @@ export function useAwdRealtime(eventId: string): AwdRealtime {
 			key: `${counter.current}-${lastEvent.type}`,
 			type: lastEvent.type,
 			kind: eventKind(lastEvent.type),
+			payload: lastEvent.payload,
 			summary: summarize(lastEvent.payload),
 			occurredAt: lastEvent.occurred_at ?? null,
 		};

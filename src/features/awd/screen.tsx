@@ -23,32 +23,12 @@ import { useBindings, useClient } from "../../api/client.ts";
 import { call } from "../../api/call.ts";
 import { qk } from "../../api/keys.ts";
 import { QueryBoundary } from "../../ui/overlays.tsx";
+import { LIFECYCLE_LABEL, PHASE_LABEL, describeAwdEvent } from "./events.ts";
 import { awdStreamStateMeta, useAwdRealtime } from "./stream.tsx";
 
 // ── 展示用小工具（纯展示，不改语义） ────────────────────────────────
 
-const PHASE_LABEL: Record<string, string> = {
-	hardening: "加固期",
-	attack: "攻击期",
-	pause: "暂停期",
-};
-
-const LIFECYCLE_LABEL: Record<string, string> = {
-	draft: "草稿",
-	configuring: "配置中",
-	deploying: "部署中",
-	deployed: "已部署",
-	prechecking: "预检中",
-	verified: "已验证",
-	start_blocked: "开赛受阻",
-	deploy_failed: "部署失败",
-	verification_failed: "验证失败",
-	running: "进行中",
-	paused: "已暂停",
-	network_error: "网络异常",
-	finished: "已结束",
-	archived: "已归档",
-};
+// 阶段 / 生命周期中文名与事件战报统一放在 `./events.ts`（payload 字段来自后端定义）。
 
 /** 阶段 → CSS 语气（`.xz-screen[data-phase]` 决定强调色）。 */
 function phaseTone(phase: string): "hardening" | "attack" | "pause" | "unknown" {
@@ -106,6 +86,8 @@ function toScreenStatus(raw: unknown): ScreenStatus | null {
 interface ScreenFeedEntry {
 	key: string;
 	type: string;
+	/** 平台原始 payload，供 `describeAwdEvent` 翻译。 */
+	payload: unknown;
 	summary: string;
 	occurredAt: string | null;
 }
@@ -127,6 +109,7 @@ function toFeedEntry(event: { type?: string; payload?: unknown; occurred_at?: st
 	return {
 		key: `${seq}-${type}`,
 		type,
+		payload: event.payload,
 		summary: summary.length > 160 ? `${summary.slice(0, 160)}…` : summary,
 		occurredAt: typeof event.occurred_at === "string" ? event.occurred_at : null,
 	};
@@ -237,6 +220,8 @@ function AwdBigScreenView({
 	}, [scores]);
 
 	const phase = status?.phase ?? "";
+	// 队伍 ID → 名称：让战报里出现队名而不是 UUID（数据来自积分榜，不猜）。
+	const teamNames = new Map(scores.map((row) => [row.team_id, row.team_name]));
 	const meta = awdStreamStateMeta(streamState);
 	const exitHref = admin ? `/admin/events/${eventId}` : `/events/${eventId}`;
 	const roundText = status
@@ -330,7 +315,9 @@ function AwdBigScreenView({
 								<span className="xz-screen__feed-time">{hhmmss(entry.occurredAt)}</span>
 								<span className="xz-screen__feed-type">{entry.type}</span>
 								<span className="xz-screen__feed-text" title={entry.summary}>
-									{entry.summary || "—"}
+									{describeAwdEvent(entry.type, entry.payload, teamNames, ownTeamId) ||
+										entry.summary ||
+										"—"}
 								</span>
 							</div>
 						))
@@ -407,6 +394,7 @@ export function AwdBigScreenPlayer({ eventId }: { eventId: string }) {
 			feed={realtime.feed.map((entry) => ({
 				key: entry.key,
 				type: entry.type,
+				payload: entry.payload,
 				summary: entry.summary,
 				occurredAt: entry.occurredAt,
 			}))}

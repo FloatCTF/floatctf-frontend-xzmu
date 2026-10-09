@@ -15,6 +15,7 @@ import { useClient } from "../../api/client.ts";
 import { errorText } from "../../api/errors.ts";
 import { qk } from "../../api/keys.ts";
 import { formatNumber, formatTime } from "../../lib/format.ts";
+import { describeAwdEvent } from "./events.ts";
 import { Link } from "../../router/Link.tsx";
 import { Icon } from "../../ui/icons.tsx";
 import { QueryBoundary, useConfirm, useToast } from "../../ui/overlays.tsx";
@@ -721,15 +722,21 @@ export function AwdFeedCard({ realtime }: { realtime: AwdRealtime }) {
 					/>
 				) : (
 					<ul className="xz-feed">
-						{realtime.feed.map((entry) => (
-							<li className="xz-feed__item" key={entry.key} data-kind={entry.kind}>
-								<span className="xz-awd-feed__type">{entry.type}</span>
-								{entry.summary ? (
-									<span className="xz-awd-feed__summary xz-mono xz-xs">{entry.summary}</span>
-								) : null}
-								<span className="xz-feed__time">{entry.occurredAt ? formatTime(entry.occurredAt) : "—"}</span>
-							</li>
-						))}
+						{realtime.feed.map((entry) => {
+							// 战报优先（payload 字段取自后端 `websocket.rs`）；认不出的事件回落到原始摘要。
+							const line = describeAwdEvent(entry.type, entry.payload) || entry.summary;
+							return (
+								<li className="xz-feed__item" key={entry.key} data-kind={entry.kind}>
+									<span className="xz-awd-feed__type">{entry.type}</span>
+									{line ? (
+										<span className="xz-awd-feed__summary xz-xs" title={entry.summary}>
+											{line}
+										</span>
+									) : null}
+									<span className="xz-feed__time">{entry.occurredAt ? formatTime(entry.occurredAt) : "—"}</span>
+								</li>
+							);
+						})}
 					</ul>
 				)}
 			</CardBody>

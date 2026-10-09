@@ -2,7 +2,7 @@
 	"schemaVersion": 1,
 	"id": "xzmu",
 	"name": "西藏民族大学 CTF 平台",
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"description": "西藏民族大学主题的 FloatCTF 前端（完整替换：选手端 + 管理端）",
 	"author": "FloatCTF",
 	"compatibility": {
