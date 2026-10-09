@@ -284,7 +284,7 @@ export function EventUsersTab({ eventId }: { eventId: string }) {
 				size="wide"
 				persistent={add.isPending}
 				title="把用户加入赛事"
-				description="支持勾选已有用户或直接粘贴用户 ID。批量提交时后端走 `user_id_list`。"
+				description="支持勾选已有用户或直接粘贴用户 ID"
 				footer={
 					<>
 						<Button variant="quiet" onClick={() => setAddOpen(false)} disabled={add.isPending}>

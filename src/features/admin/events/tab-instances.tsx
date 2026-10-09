@@ -94,7 +94,7 @@ export function EventInstancesTab({ eventId }: { eventId: string }) {
 				<CardHead
 					title="赛事实例"
 					icon="box"
-					sub="challenge 与 gamebox 归一化视图；接口不返回 flag（只读）"
+					sub="challenge 与 gamebox 归一化视图"
 				/>
 				<CardBody flush>
 					<QueryBoundary

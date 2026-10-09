@@ -288,7 +288,7 @@ export function TopPage() {
 		<div className="xz-page">
 			<CommunityHead
 				title="Top15 排行榜"
-				desc="按平台练习赛事的解出记录统计的前 15 位选手；解出题数相同时，最近解出时间更晚者靠前。该接口不分页。"
+				desc="按平台练习赛事的解出记录统计的前 15 位选手；解出题数相同时，最近解出时间更晚者靠前"
 			/>
 
 			<Card>

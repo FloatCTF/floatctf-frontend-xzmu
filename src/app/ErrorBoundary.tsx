@@ -52,7 +52,7 @@ export class ErrorBoundary extends Component<Props, State> {
 			<div className="xz-page">
 				<ErrorState
 					title="这个页面出错了"
-					message="页面在渲染时遇到异常，已被安全拦截。左侧导航仍可正常使用，你也可以重试或返回总览。"
+					message="页面在渲染时遇到异常，已被安全拦截。左侧导航仍可正常使用，你也可以重试或返回总览"
 					detail={error.message}
 				/>
 				<div className="xz-row" style={{ justifyContent: "center", marginTop: -8, gap: 8 }}>

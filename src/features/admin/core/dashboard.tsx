@@ -589,7 +589,7 @@ export function AdminDashboardPage() {
 					// 显式报错，**绝不**让下面的 `data.stats.users` 在渲染期抛异常。
 					<ErrorState
 						title="总览接口返回了非预期结构"
-						message="`GET /api/admin/dashboard/summary` 返回的数据缺少 stats / attention / events / activity 字段，页面无法安全渲染。这通常意味着前端与后端版本不一致。"
+						message="`GET /api/admin/dashboard/summary` 返回的数据缺少 stats / attention / events / activity 字段，页面无法安全渲染"
 						retryable
 						onRetry={() => void summary.refetch()}
 					/>

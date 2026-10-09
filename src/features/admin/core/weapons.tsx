@@ -361,7 +361,7 @@ export function AdminWeaponsPage() {
 		<div className="xz-page xz-page--wide">
 			<AdminPageHead
 				title="武器库管理"
-				desc="选手端「武器库」的工具与脚本条目；文件走 RustFS 上传，条目字段与文件分开维护。"
+				desc="选手端「武器库」的工具与脚本条目"
 				actions={
 					<Button
 						variant="primary"

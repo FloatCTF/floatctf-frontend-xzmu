@@ -654,7 +654,7 @@ export function EventCockpitPage({ params }: PageProps) {
 					// `data.event.family` 上抛异常（那样整页会被错误边界接管）。
 					<ErrorState
 						title="赛事接口返回了非预期结构"
-						message="`GET /api/events/{id}` 的响应缺少 event / joined 字段，页面无法安全渲染。请确认前端与后端版本一致。"
+						message="`GET /api/events/{id}` 的响应缺少 event / joined 字段，页面无法安全渲染"
 						retryable
 						onRetry={() => void info.refetch()}
 					/>

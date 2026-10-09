@@ -289,7 +289,7 @@ export function MyDiscussionsPage() {
 		<div className="xz-page">
 			<CommunityHead
 				title="我的帖子"
-				desc="只显示你自己的帖子。编辑或删除都由后端再次校验作者身份。"
+				desc="只显示你自己的帖子"
 				actions={
 					<>
 						<Link to="/community/discussions">

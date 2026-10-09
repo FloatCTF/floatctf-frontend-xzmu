@@ -305,7 +305,7 @@ export function AdminUsersPage() {
 		<div className="xz-page xz-page--wide">
 			<AdminPageHead
 				title="用户管理"
-				desc="选手账号的创建、改名与删除。密码只在创建 / 重置时作为输入提交，列表与接口都不会展示明文。"
+				desc="选手账号的创建、改名与删除"
 				actions={
 					<Button
 						variant="primary"

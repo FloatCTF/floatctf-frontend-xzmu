@@ -202,7 +202,7 @@ export function AdminFrontendsPage() {
 				loadingLabel="正在读取当前生效前端…"
 			>
 				<Card className="xz-adm-section">
-					<CardHead icon="settings" title="当前生效" sub="来自动态设置（resolved_value 是后端解析值）" />
+					<CardHead icon="settings" title="当前生效" sub="来自动态设置" />
 					<CardBody>
 						{activeSetting ? (
 							<div className="xz-row" style={{ gap: "var(--xz-sp-4)", flexWrap: "wrap" }}>

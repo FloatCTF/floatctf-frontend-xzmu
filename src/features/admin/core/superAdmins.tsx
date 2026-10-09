@@ -367,7 +367,7 @@ export function AdminSuperAdminsPage() {
 			<FormModal
 				open={form !== null}
 				title={form?.mode === "edit" ? "编辑管理员" : "新建管理员"}
-				description="修改接口走 POST /super_admin/{id}（SDK 内部实现），密码留空表示不修改。"
+				description="修改接口走 POST /super_admin/{id}，密码留空表示不修改"
 				onClose={() => setForm(null)}
 			>
 				{form ? (

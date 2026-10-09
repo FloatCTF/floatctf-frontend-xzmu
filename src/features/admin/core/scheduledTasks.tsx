@@ -187,7 +187,7 @@ function TaskForm({
 				<Field
 					label="任务键"
 					required
-					hint="必须是后端已注册的任务键（未知键会被拒绝）；可从候选列表选择"
+					hint="必须是后端已注册的任务键；可从候选列表选择"
 				>
 					{(props) => (
 						<>
@@ -230,7 +230,7 @@ function TaskForm({
 				<Field
 					label="Cron 表达式"
 					required={draft.trigger_type === "cron"}
-					hint="仅在触发方式为 cron 时生效（后端用 cron 库校验）"
+					hint="仅在触发方式为 cron 时生效"
 				>
 					{(props) => (
 						<TextInput
@@ -246,7 +246,7 @@ function TaskForm({
 				<Field
 					label="执行时间"
 					required={draft.trigger_type === "once"}
-					hint="仅在触发方式为 once 时生效（按浏览器本地时区提交）"
+					hint="仅在触发方式为 once 时生效"
 				>
 					{(props) => (
 						<TextInput
@@ -270,7 +270,7 @@ function TaskForm({
 				)}
 			</Field>
 			<Checkbox
-				label="启用（创建时默认启用；停用的任务不会被调度器拾取）"
+				label="启用（创建时默认启用"
 				checked={draft.enabled}
 				onChange={(checked) => setDraft({ ...draft, enabled: checked })}
 			/>
@@ -555,7 +555,7 @@ export function AdminScheduledTasksPage() {
 		<div className="xz-page xz-page--wide">
 			<AdminPageHead
 				title="计划任务"
-				desc="平台调度器的任务定义。任务键由后端校验（未知键会被拒绝），手动运行会立刻产生真实副作用。"
+				desc="平台调度器的任务定义"
 				actions={
 					<Button
 						variant="primary"
@@ -628,7 +628,7 @@ export function AdminScheduledTasksPage() {
 			<FormModal
 				open={form !== null}
 				title={form?.task ? "编辑任务" : "新建任务"}
-				description="任务键必须是后端 TaskKey 已注册的键；cron 需要 Cron 表达式，once 需要执行时间。"
+				description="任务键必须是后端 TaskKey 已注册的键；cron 需要 Cron 表达式，once 需要执行时间"
 				onClose={() => setForm(null)}
 			>
 				{form ? (

@@ -335,7 +335,7 @@ export function EventChallengesTab({ eventId }: { eventId: string }) {
 			<ChallengePickerModal
 				open={pickerOpen}
 				title="把题目加入本赛事"
-				description="只提交题目 ID；分值使用后端默认值，加入后可单独调整。"
+				description="只提交题目 ID"
 				excludedIds={excluded}
 				busy={add.isPending}
 				onClose={() => setPickerOpen(false)}

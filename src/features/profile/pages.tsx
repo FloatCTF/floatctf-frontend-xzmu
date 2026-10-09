@@ -170,7 +170,7 @@ function ProfileForm({
 			<Field
 				label="新密码"
 				error={touched ? passwordError : undefined}
-				hint="留空表示不修改密码；如修改则至少 8 位，且不会被强制下线。"
+				hint="留空表示不修改密码"
 			>
 				{(props) => (
 					<TextInput
@@ -432,7 +432,7 @@ export function MyWriteupsPage() {
 		<div className="xz-page">
 			<MeHead
 				title="我的题解"
-				desc="平台没有「我的题解」专用接口：本页从全站题解列表中按作者身份筛出你的条目。"
+				desc="平台没有「我的题解」专用接口：本页从全站题解列表中按作者身份筛出你的条目"
 				actions={
 					<>
 						<Link to="/me">

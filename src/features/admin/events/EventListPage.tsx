@@ -135,7 +135,7 @@ function EventFormModal({ event, onClose }: { event: Events | null; onClose: () 
 			size="wide"
 			persistent={save.isPending}
 			title={event ? `编辑赛事 · ${event.title}` : "创建赛事"}
-			description="family × purpose × participant_mode 的合法组合由后端校验，这里只提供合法选项。"
+			description="family × purpose × participant_mode 的合法组合由后端校验，这里只提供合法选项"
 			footer={
 				<>
 					<Button variant="quiet" onClick={onClose} disabled={save.isPending}>

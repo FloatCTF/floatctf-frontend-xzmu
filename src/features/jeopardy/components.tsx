@@ -442,7 +442,7 @@ export function ChallengeRunner({
 								submit.mutate({ instanceId: instance.id, flag: value });
 							}}
 						>
-							<Field label="提交 flag" hint="提交正确的 flag 后，该题会记入你的成绩，实例由后端关闭。">
+							<Field label="提交 flag" hint="提交正确的 flag 后，该题会记入你的成绩，实例由后端关闭">
 								{(props) => (
 									<TextInput
 										{...props}

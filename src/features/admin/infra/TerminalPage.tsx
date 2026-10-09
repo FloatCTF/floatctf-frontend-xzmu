@@ -21,7 +21,7 @@
  * ## 为什么不是 xterm.js
  * 本前端禁止新增依赖（仓库 AGENTS.md 硬规则 1：只允许 sdk / frontend-runtime / react 等），
  * 因此这里是 `<pre>` + `keydown` + `ResizeObserver` 的**最小可用实现**。
- * 它支持交互式行式命令，但不做 VT 光标定位与全屏渲染 —— 该限制在页面上**如实说明**，
+ * 它支持交互式行式命令，但不做 VT 光标定位与全屏渲染，
  * 不假装功能完整。
  */
 
@@ -536,7 +536,6 @@ export function AdminTerminalPage() {
 					<h1 className="xz-page__title">Web 终端</h1>
 					<p className="xz-page__desc">
 						在 API 容器内打开一个真实 PTY shell（后端按 fish → zsh → bash → sh 顺序选择）。
-						终端会话由一次性 ticket 授权，输入输出都是真实字节流，不做任何模拟。
 					</p>
 				</div>
 			</header>
@@ -620,41 +619,7 @@ export function AdminTerminalPage() {
 				</CardBody>
 			</Card>
 
-			<Card className="xz-inf-create">
-				<CardHead title="实现边界（如实说明）" icon="info" />
-				<CardBody>
-					<ul className="xz-inf-term__notes">
-						<li>
-							未引入 xterm.js（本前端禁止新增依赖），这里是{" "}
-							<code className="xz-code">{"<pre>"}</code> + 键盘事件 +{" "}
-							<code className="xz-code">ResizeObserver</code> 的最小实现。
-						</li>
-						<li>
-							ANSI 转义序列会被解析并丢弃，不做光标定位与全屏渲染：
-							<code className="xz-code">vim</code> / <code className="xz-code">top</code> /{" "}
-							<code className="xz-code">htop</code> 等全屏程序无法正确显示，请使用行式命令（
-							<code className="xz-code">ls</code>、<code className="xz-code">cat</code>、
-							<code className="xz-code">journalctl -n 50</code> 等）。
-						</li>
-						<li>
-							本地不渲染输入字符：看到的是远端 PTY 的回显，因此{" "}
-							<code className="xz-code">stty -echo</code> 的程序（如输入密码）不会在屏幕上显示任何输入。
-						</li>
-						<li>
-							<code className="xz-code">Ctrl+C</code> 会作为 SIGINT 上送给远端，所以不能用它在终端区域内复制
-							文本；请使用右上角的「复制全部输出」。
-						</li>
-						<li>
-							输出只保留最近 {MAX_BUFFER.toLocaleString("zh-CN")} 个字符；行列数按容器尺寸与等宽字体估算，
-							后端收到 resize 后会执行 <code className="xz-code">stty rows/cols</code>。
-						</li>
-						<li>
-							离开本路由或关闭页面时会立即 <code className="xz-code">ws.close()</code>
-							，同时清理重连定时器；后端在连接关闭后会终止 PTY 子进程。
-						</li>
-					</ul>
-				</CardBody>
-			</Card>
+
 
 			<Card>
 				<CardHead title="逃生舱明细" icon="warn" />

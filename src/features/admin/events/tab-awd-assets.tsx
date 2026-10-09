@@ -672,7 +672,7 @@ export function AwdGameboxesSection({ eventId }: { eventId: string }) {
 				size="wide"
 				persistent={add.isPending}
 				title="把 GameBox 加入本赛事"
-				description="留空的字段由后端默认值决定；host_offset 用于错开宿主端口。"
+				description="留空的字段由后端默认值决定"
 				footer={
 					<>
 						<Button variant="quiet" onClick={() => setAddOpen(false)} disabled={add.isPending}>
@@ -749,7 +749,7 @@ export function AwdGameboxesSection({ eventId }: { eventId: string }) {
 				onClose={() => setEditing(null)}
 				persistent={update.isPending}
 				title={`赛事 GameBox 配置 · ${editing?.gamebox_name ?? ""}`}
-				description="可空字段留空表示不修改（与 SDK 的「省略 = 不改」语义一致）。"
+				description="可空字段留空表示不修改"
 				footer={
 					<>
 						<Button variant="quiet" onClick={() => setEditing(null)} disabled={update.isPending}>

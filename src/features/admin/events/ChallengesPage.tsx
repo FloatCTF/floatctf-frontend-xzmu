@@ -583,7 +583,7 @@ function ChallengeFormModal({
 					/>
 					<Field
 						label="静态 flag（static_flag_value）"
-						hint="仅 admin 接口返回；展示时始终模糊。选手端永远不会看到该字段。"
+						hint="仅 admin 接口返回；展示时始终模糊"
 					>
 						{(props) => (
 							<TextInput

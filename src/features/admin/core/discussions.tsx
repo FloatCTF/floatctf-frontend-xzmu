@@ -375,7 +375,7 @@ export function AdminDiscussionsPage() {
 		<div className="xz-page xz-page--wide">
 			<AdminPageHead
 				title="讨论管理"
-				desc="选手社区讨论的内容治理。列表接口只返回实体字段（无作者昵称），详情与评论在右侧抽屉内查看与删除。"
+				desc="选手社区讨论的内容治理"
 			/>
 
 			<Card>

@@ -390,7 +390,7 @@ export function AdminSettingsPage() {
 		<div className="xz-page xz-page--wide">
 			<AdminPageHead
 				title="动态设置"
-				desc="平台运行期配置。value 是数据库原值（可含模板），resolved_value 是后端解析后的生效值，两者可能不同。"
+				desc="平台运行期配置"
 				actions={
 					<Button
 						variant="primary"

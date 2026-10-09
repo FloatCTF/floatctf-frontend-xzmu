@@ -621,7 +621,7 @@ export function AwdCredentialsCard({
 									<EmptyState
 										title="未返回配置文本"
 										icon="globe"
-										desc="后端返回的 config 为空（可能尚未部署 WireGuard 网络）。"
+										desc="后端返回的 config 为空（可能尚未部署 WireGuard 网络）"
 									/>
 								)}
 							</QueryBoundary>
@@ -643,7 +643,7 @@ export function AwdCredentialsCard({
 									<EmptyState
 										title="未返回 SSH 凭据"
 										icon="terminal"
-										desc="凭据在后端部署完成后才可用；未加入队伍或未部署时不会有数据。"
+										desc="凭据在后端部署完成后才可用"
 									/>
 								)}
 							</QueryBoundary>

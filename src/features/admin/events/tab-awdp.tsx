@@ -457,7 +457,7 @@ function AwdpGameboxesSection({ eventId }: { eventId: string }) {
 			<CardHead
 				title="赛事 GameBox"
 				icon="box"
-				sub="挂载只接受具备完整 AWDP capability 的 GameBox（后端校验）"
+				sub="挂载只接受具备完整 AWDP capability 的 GameBox"
 				actions={
 					<Button variant="primary" icon="plus" onClick={() => setAttachOpen(true)}>
 						挂载 GameBox
