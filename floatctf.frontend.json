@@ -2,7 +2,7 @@
 	"schemaVersion": 1,
 	"id": "xzmu",
 	"name": "西藏民族大学 CTF 平台",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "西藏民族大学主题的 FloatCTF 前端（完整替换：选手端 + 管理端）",
 	"author": "FloatCTF",
 	"compatibility": {
@@ -10,7 +10,9 @@
 		"apiContract": "1"
 	},
 	"entry": "assets/frontend.js",
-	"styles": ["assets/frontend.css"],
+	"styles": [
+		"assets/frontend.css"
+	],
 	"build": {
 		"packageManager": "auto",
 		"script": "build",
