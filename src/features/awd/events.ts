@@ -105,9 +105,12 @@ export function describeAwdEvent(
 			const attacker = team(p.attacker_team_id);
 			const victim = team(p.victim_team_id);
 			const points = number(p.points);
-			return points === null
-				? `${attacker} 攻破 ${victim}`
-				: `${attacker} 攻破 ${victim}（+${points}）`;
+			const loss = number(p.victim_loss);
+			const parts: string[] = [];
+			if (points !== null) parts.push(`+${points}`);
+			if (loss !== null && loss > 0) parts.push(`对方 -${loss}`);
+			if (p.first_blood === true) parts.push("首杀");
+			return `${attacker} 攻破 ${victim}${parts.length > 0 ? `（${parts.join("，")}）` : ""}`;
 		}
 		case "score.changed": {
 			const who = team(p.team_id);
@@ -158,4 +161,48 @@ export function describeAwdEvent(
 		default:
 			return "";
 	}
+}
+
+/** 带 payload 与时间的流水条目（大屏与面板的 feed 形状）。 */
+export interface AwdFeedLike {
+	type: string;
+	payload: unknown;
+	occurredAt: string | null;
+}
+
+/**
+ * 战报去重（纯展示层）：
+ *
+ * 一次成功提交后端会发两条事件 —— `score.changed`（攻击方得分）与
+ * `attack.success`（双方队伍 + 一血）。同一条战况显示两行是噪音，所以当
+ * `attack.success` 存在时，丢弃它前后 5 秒内**同一攻击方**的 `score.changed`。
+ *
+ * 只做筛选，不改写任何字段；匹配不上时原样保留（宁可多显示，不丢信息）。
+ */
+export function dedupeAwdFeed<T extends AwdFeedLike>(entries: T[]): T[] {
+	const attacks = entries.filter((entry) => entry.type === "attack.success");
+	if (attacks.length === 0) return entries;
+
+	const millis = (value: string | null): number | null => {
+		if (!value) return null;
+		const time = new Date(value).getTime();
+		return Number.isNaN(time) ? null : time;
+	};
+
+	return entries.filter((entry) => {
+		if (entry.type !== "score.changed") return true;
+		const p = asRecord(entry.payload);
+		const delta = number(p.delta);
+		if (delta === null || delta <= 0) return true; // 失分等其它变更一律保留
+		const teamId = text(p.team_id);
+		if (!teamId) return true;
+		const at = millis(entry.occurredAt);
+		return !attacks.some((attack) => {
+			const ap = asRecord(attack.payload);
+			if (text(ap.attacker_team_id) !== teamId) return false;
+			const attackAt = millis(attack.occurredAt);
+			if (at === null || attackAt === null) return true; // 时间不可比时按同一条处理
+			return Math.abs(attackAt - at) <= 5_000;
+		});
+	});
 }

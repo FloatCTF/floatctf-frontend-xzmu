@@ -23,7 +23,7 @@ import { useBindings, useClient } from "../../api/client.ts";
 import { call } from "../../api/call.ts";
 import { qk } from "../../api/keys.ts";
 import { QueryBoundary } from "../../ui/overlays.tsx";
-import { LIFECYCLE_LABEL, PHASE_LABEL, describeAwdEvent } from "./events.ts";
+import { LIFECYCLE_LABEL, PHASE_LABEL, dedupeAwdFeed, describeAwdEvent } from "./events.ts";
 import { awdStreamStateMeta, useAwdRealtime } from "./stream.tsx";
 
 // ── 展示用小工具（纯展示，不改语义） ────────────────────────────────
@@ -222,6 +222,8 @@ function AwdBigScreenView({
 	const phase = status?.phase ?? "";
 	// 队伍 ID → 名称：让战报里出现队名而不是 UUID（数据来自积分榜，不猜）。
 	const teamNames = new Map(scores.map((row) => [row.team_id, row.team_name]));
+	// 一次攻击会带出 score.changed + attack.success 两条，只留信息量更大的那条。
+	const visibleFeed = dedupeAwdFeed(feed);
 	const meta = awdStreamStateMeta(streamState);
 	const exitHref = admin ? `/admin/events/${eventId}` : `/events/${eventId}`;
 	const roundText = status
@@ -310,7 +312,7 @@ function AwdBigScreenView({
 							{connected ? "等待事件…" : "实时链路未连接，仅按轮询刷新"}
 						</div>
 					) : (
-						feed.map((entry) => (
+						visibleFeed.map((entry) => (
 							<div key={entry.key} className="xz-screen__feed-row" data-tone={feedTone(entry.type)}>
 								<span className="xz-screen__feed-time">{hhmmss(entry.occurredAt)}</span>
 								<span className="xz-screen__feed-type">{entry.type}</span>
